@@ -1,0 +1,99 @@
+*, *::after, *::before{
+  box-sizing: border-box;
+  text-decoration: none;
+}
+:root{
+  --bg-sidebar: hsla(0,0%,100%,0.05);
+  --alpha-bg: hsla(0,0%,100%,0.1);
+  --layout-bg: #542c75;
+  --alpha-layout-bg: rgb(93 54 124);
+  --loading-bg: hsla(0,0%,100%,0.1);
+  --navigation-text: #dadada;
+  --primary-bg: #6a39af;
+  --purple-primary: #ed2b91;
+  --text-placeholder: #dadada;
+  --text-primary: #fff;
+  --text-secondary: hsla(0,0%,100%,0.5);
+  --text-item-hover: #fff;
+  --white: #fff;
+  --black: #32323d;
+  --search-text: #eee;
+  --border-primary: hsla(0,0%,100%,0.1);
+  --padding-section: 59px;
+
+  /* --border-primary: rgba(0,0,0,0.1); */
+
+  --scroll-thumb-bg: hsla(0,0%,100%,0.3);
+
+  --img-logo-mp3: url(https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg);
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::-webkit-scrollbar{
+  width: 6px;
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 50%);
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset #fff;
+  border-radius: 4px;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+div p{
+  word-break: break-word;
+}
+.btn{
+  font-size: 14px;
+  border-radius: 999px;
+  line-height: normal;
+  border: 0;
+  display: inline-block;
+  font-weight: 400;
+  text-transform: none;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* sidebar css */
+.is-active{
+  background-color: var(--alpha-bg);
+  color: var(--text-item-hover);
+  border-left: 3px solid var(--purple-primary) !important;
+}
+.is-medium{
+  font-size: 14px;
+  padding: 9px 24px;
+}
+.is-outline{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  background-color: var(--alpha-bg);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
+  margin: 0 auto;
+}
+.is-upper{
+  text-transform: uppercase;
+}
+.pt-15{
+  padding-top: 15px!important;
+}

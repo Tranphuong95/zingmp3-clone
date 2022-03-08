@@ -1,0 +1,207 @@
+
+.sidebar{
+    position: relative;
+    z-index: 100;
+    width: 240px;
+    background-color: var(--bg-sidebar);
+    height: calc(100vh - 90px);
+    padding-top: 70px;
+    padding-bottom: 54px;
+    .sidebar-wrapper{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    .navbar{
+        width: 100%;
+        .navbar-brand{
+            display: flex;
+            align-items: center;
+            width: 240px;
+            height: 70px;
+            position: fixed;
+            top: 0;
+            padding: 0 25px 0 28px;
+            .navbar-item{
+                button{
+                    display: inline-block;
+                    line-height: 0;
+                    padding: 0;
+                    margin: 0;
+                    border-radius: 0;
+                    background-color: transparent;
+                    .logo{
+                        width: 120px;
+                        height: 40px;
+                        display: inline-block;
+                        background: var(--img-logo-mp3) 50%/contain no-repeat;
+                    }
+                }
+            }
+
+        }
+    }
+    .navbar-main{
+        position: relative;
+        margin-bottom: 15px;
+        .navbar-menu{
+            .navbar-item{
+                color: var(--navigation-text);
+                font-weight: 700;
+                border-left: 3px solid transparent;
+                a{
+                    display: flex;
+                    align-items: center;
+                    font-size: 13px;
+                    font-weight: 700;
+                    padding: 7px 25px;
+                    figure{
+                        background-color: var(--loading-bg);
+                    }
+                    .tag{
+                        line-height: 0;
+                        margin-left: 8px;
+                        background-color: inherit;
+                    }
+                }
+            }
+            .navbar-item:hover{
+                color: var(--text-item-hover);
+            }
+        }
+        
+    }
+    .sidebar-divide{
+        position: relative;
+        height: 1px;
+    }
+    .sidebar-divide::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 25px;
+        right: 25px;
+        border-top: 1px solid var(--layout-bg);
+    }
+    .sub-navbar{
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        .sidebar-scrollbar{
+            position: absolute;
+            inset: 0px;
+            overflow: hidden scroll;
+            margin-top: 10px;
+            margin-right: -6px;
+            margin-bottom: 0;
+            .navbar{
+                margin-top: 5px !important;
+                margin-bottom: 0 !important;
+            }
+            .vip-banner-sidebar{
+                padding: 15px 8px;
+                border-radius: 8px;
+                margin: 10px 20px;
+                text-align: center;
+                background-image: linear-gradient(117deg, #5a4be7, #c86dd7 102%);
+
+                .text{
+                    font-size: 12px;
+                    margin-bottom: 10px;
+                    font-weight: 600;
+                    border-color: #ffdb00;
+                    line-height: 1.67;
+                    color: var(--white)
+                }
+                .btn{
+                    display: inline-block;
+                    background-color: #ffdb00;
+                    border-color: #ffdb00;
+                    color: var(--black);
+
+                    padding: 6px 35px;
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+            }
+            .navbar-my-music{
+                font-size: 12px;
+                padding-top: 20px;
+                // position: absolute;
+                .main-title{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 26px;
+                    .edit-btn:hover{
+                        background-color: var(--alpha-bg);
+                    }
+                    
+                }
+                .title{
+                    font-weight: 700;
+                    color: var(--text-primary);
+                    text-transform: uppercase;
+                    margin: 0 28px 8px;
+                    white-space: nowrap;
+                }
+                .edit-btn{
+                    display: none;
+                    padding: 6px;
+                    background-color: transparent;
+                }
+                &:hover .edit-btn{
+                    display: block;
+                }
+                .library-personal li a{
+                    color: var(--navigation-text)
+                }
+                .library-personal li:hover a{
+                    color: var(--text-item-hover);
+                }
+            }
+            .navbar-my-playlist{
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+        }
+        .is-mark{
+            -webkit-mask-image: linear-gradient(180deg,hsla(0,0%,100%,0),hsla(0,0%,100%,.8) 10%,#fff 25%,#fff);
+        }
+        .track-horizontal{
+
+        }
+        .track-vertical{
+            .thumb-vertical{
+                background-color: var(--scroll-thumb-bg);
+                border-radius: 2px;
+            }
+        }
+    }
+    .add-playlist-sidebar{
+        .btn-add-playlist{
+            position: fixed;
+            width: 240px;
+            left: 0;
+            height: 54px;
+            border-top: 1px solid var(--border-primary);
+            padding: 0 28px;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            color: var(--text-primary);
+            font-weight: 700;
+            bottom: 90px;
+        }
+        .btn-add-playlist:hover{
+            color: var(--text-item-hover);
+            -webkit-filter: brightness(.9);
+            filter: brightness(.9);
+        }
+    }
+    .btn-expanded{
+        display: none;
+        
+    }
+}

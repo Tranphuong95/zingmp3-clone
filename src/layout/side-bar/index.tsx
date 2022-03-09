@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { faAdd, faChartLine, faChessBoard, faClockRotateLeft, faFileAudio, faIcons, faList, faMusic, faNoteSticky, faPen, faPlus, faPodcast, faRecordVinyl, faStar, faTicket, faTv } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { faAdd, faAddressCard, faChartLine, faClockRotateLeft, faFileAudio, faIcons, faList, faMusic, faNoteSticky, faPen, faPodcast, faRecordVinyl, faStar, faTicket} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../../styles/layout/sidebar.module.scss';
 import ToolTip from '../../until-component/tooltip';
@@ -9,6 +10,8 @@ const SideBar: React.FC = () => {
     fontSize: 24,
     marginRight: 10,
   }
+  const navigate=useNavigate();
+  const location=useLocation();
   const contentRef = useRef<HTMLDivElement>(null);
   const scrollTrackRef = useRef<HTMLDivElement>(null);
   const scrollThumbRef = useRef<HTMLDivElement>(null);
@@ -20,7 +23,9 @@ const SideBar: React.FC = () => {
 
   const [thumbHeight, setThumbHeight] = useState(30);
 
-  const [isMark, setIsMark] = useState(false)
+  const [isMark, setIsMark] = useState(false);
+
+  
 
   const handleThumbPosition = useCallback(() => {
     if (
@@ -194,6 +199,7 @@ const SideBar: React.FC = () => {
       document.removeEventListener('mouseleave', handleThumbMouseup);
     };
   }, [handleThumbMousemove, handleThumbMouseup]);
+  console.log(location)
   return (
     <aside className={styles["sidebar"]}>
       <div className={styles["sidebar-wrapper"]}>
@@ -208,24 +214,24 @@ const SideBar: React.FC = () => {
         </nav>
         <nav className={styles["navbar-main"]}>
           <ul className={styles["navbar-menu"]}>
-            <li className={`${styles["navbar-item"]} sidebar-lib is-active`}>
-              <a title='Cá nhân'>
-                <FontAwesomeIcon icon={faTv} style={SIDEBAR_MENU_ITEM} />
+            <li className={`${styles["navbar-item"]} sidebar-lib ${location.pathname==="/mymusic"?"is-active":""}`} onClick={()=>navigate("/mymusic")}>
+              <a title='Cá nhân' >
+                <FontAwesomeIcon icon={faAddressCard} style={SIDEBAR_MENU_ITEM} />
                 <span>Cá nhân</span>
               </a>
             </li>
-            <li className={`${styles["navbar-item"]}`}>
+            <li className={`${styles["navbar-item"]} ${location.pathname==="/"?"is-active":""}`} onClick={()=>navigate("/")}>
               <a title="Khám phá">
                 <FontAwesomeIcon icon={faRecordVinyl} style={SIDEBAR_MENU_ITEM} />
                 <span>Khám phá</span>
               </a>
             </li>
-            <li className={`${styles["navbar-item"]}`}>
+            <li className={`${styles["navbar-item"]} ${location.pathname==="/zing-chart"?"is-active":""}`} onClick={()=>navigate("/zing-chart")}>
               <a title="#zingchart">
                 <FontAwesomeIcon icon={faChartLine} style={SIDEBAR_MENU_ITEM} />
                 <span>#zingchart</span>
               </a></li>
-            <li className={`${styles["navbar-item"]}`}>
+            <li className={`${styles["navbar-item"]} ${location.pathname==="/radio"?"is-active":""}`} onClick={()=>navigate("/radio")}>
               <a title="Radio">
                 <FontAwesomeIcon icon={faPodcast} style={SIDEBAR_MENU_ITEM} />
                 <span>Radio</span>
@@ -233,7 +239,7 @@ const SideBar: React.FC = () => {
                   <img src="https://zjs.zadn.vn/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg" alt="" />
                 </figure>
               </a></li>
-            <li className={`${styles["navbar-item"]}`}>
+            <li className={`${styles["navbar-item"]} ${location.pathname?.split("/")[1]==="the-loai-nghe-si"?"is-active":""}`} onClick={()=>navigate("/the-loai-nghe-si/Viet-Nam/IWZ9Z08I.html")}>
               <a title="Theo dõi">
                 <FontAwesomeIcon icon={faNoteSticky} style={SIDEBAR_MENU_ITEM} />
                 <span>Theo dõi</span>
@@ -246,25 +252,25 @@ const SideBar: React.FC = () => {
             onMouseOver={handleMouseOver} ref={contentRef}>
             <nav className={`${styles["navbar"]} ${styles["navbar-main"]}`}>
               <ul className={styles["navbar-menu"]}>
-                <li className={styles["navbar-item"]}>
+                <li className={`${styles["navbar-item"]} ${location.pathname==="/moi-phat-hanh"?"is-active":""}`} onClick={()=>navigate("/moi-phat-hanh")}>
                   <a title="Nhạc mới">
                     <FontAwesomeIcon icon={faMusic} style={SIDEBAR_MENU_ITEM} />
                     <span>Nhạc mới</span>
                   </a>
                 </li>
-                <li className={styles["navbar-item"]}>
+                <li className={`${styles["navbar-item"]} ${location.pathname==="/hub"?"is-active":""}`} onClick={()=>navigate("/hub")}>
                   <a title="Thể loại">
                     <FontAwesomeIcon icon={faIcons} style={SIDEBAR_MENU_ITEM} />
                     <span>Thể loại</span>
                   </a>
                 </li>
-                <li className={styles["navbar-item"]}>
+                <li className={`${styles["navbar-item"]} ${location.pathname==="/top100"?"is-active":""}`} onClick={()=>navigate("/top100")}>
                   <a title="Top 100">
                     <FontAwesomeIcon icon={faStar} style={SIDEBAR_MENU_ITEM} />
                     <span>Top 100</span>
                   </a>
                 </li>
-                <li className={styles["navbar-item"]}>
+                <li className={`${styles["navbar-item"]} ${location.pathname?.split("/")[1]==="the-loai-video"?"is-active":""}`} onClick={()=>navigate("/the-loai-video/Viet-Nam/IWZ9Z08I.html")}>
                   <a title="MV">
                     <FontAwesomeIcon icon={faTicket} style={SIDEBAR_MENU_ITEM} />
                     <span>MV</span>

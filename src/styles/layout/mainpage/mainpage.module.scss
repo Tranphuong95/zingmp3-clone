@@ -1,0 +1,16 @@
+.mainpage{
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    width: calc(100% - 570px);
+    min-height: 100%;
+    .section{
+        margin: 0 auto;
+        padding: 0 var(--padding-section);
+    }
+}
+@media screen and (min-width: 1591px) {
+    .mainpage{
+        margin-right: 330px;
+    }
+}

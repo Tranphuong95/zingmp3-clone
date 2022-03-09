@@ -199,7 +199,6 @@ const SideBar: React.FC = () => {
       document.removeEventListener('mouseleave', handleThumbMouseup);
     };
   }, [handleThumbMousemove, handleThumbMouseup]);
-  console.log(location)
   return (
     <aside className={styles["sidebar"]}>
       <div className={styles["sidebar-wrapper"]}>

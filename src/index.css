@@ -46,6 +46,9 @@ body {
   -webkit-box-shadow: inset #fff;
   border-radius: 4px;
 }
+:focus{
+  outline: none;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -69,6 +72,14 @@ ul{
   margin: 0;
   padding: 0;
   list-style: none;
+}
+/* layout css */
+.layout{
+  display: flex;
+  width: 100%;
+  min-width: 768px;
+  height: 100vh;
+  background-color: var(--layout-bg);
 }
 
 /* sidebar css */
@@ -97,3 +108,14 @@ ul{
 .pt-15{
   padding-top: 15px!important;
 }
+/* main-page css */
+.container{  
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+  margin: 0 auto
+}
+/* .is-48x48{
+  width: 48px;
+  height: 48px;
+} */

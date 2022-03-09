@@ -9,7 +9,7 @@ import PlayBar from './layout/play-bar';
 function App() {
   return (
     <>
-    <div className={styles.section}>
+    <div className={`${styles.section} layout`}>
       <SideBar/>
       <Header/>
       <MainContent/>

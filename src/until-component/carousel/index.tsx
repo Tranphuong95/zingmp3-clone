@@ -19,6 +19,8 @@ const Carousel: React.FC<{ list: Array<ListProps> }> = ({ list }) => {
         const prevButton=galleryContainer?.querySelector<HTMLElement>("#carousel-control-prev");
         const nextButton=galleryContainer?.querySelector<HTMLElement>("#carousel-control-next");
         let currentSelectIndex = 1; //choose card select;
+        let firstPrev:any=0;
+        let firstNext:any=0;
         const changeImage = function (disableChange?:boolean) {
                 if (galleryItemList) {
                 if (currentSelectIndex > galleryItemList.length - 1) {
@@ -40,6 +42,8 @@ const Carousel: React.FC<{ list: Array<ListProps> }> = ({ list }) => {
 
                 }
                 if(!disableChange){
+                    firstPrev=0;
+                    firstNext=0;
                     currentSelectIndex++;
                 }
                 else{
@@ -49,23 +53,29 @@ const Carousel: React.FC<{ list: Array<ListProps> }> = ({ list }) => {
                 }
             }
         }
+        changeImage();
         timer.current=setInterval(() => changeImage(), 2000);
         const prevFunction=()=>{
-            currentSelectIndex--;
+            if(firstPrev===0){
+                currentSelectIndex-=2;
+                firstPrev=1;
+            }else{
+                currentSelectIndex--;
+            }
             changeImage(true)
-        //    if(timer.current){
-        //        clearInterval(timer.current)
-        //    }
            timer.current=setInterval(() => changeImage(), 2000);
             document.removeEventListener("click", nextFunction);
             document.removeEventListener("click", prevFunction);
         }
         const nextFunction=()=>{
-            currentSelectIndex++;
+            if(firstNext===0){
+                firstNext=1;
+            }
+            else{
+                currentSelectIndex++;
+            }
+            
             changeImage(true)
-            // if(timer.current){
-            //     clearInterval(timer.current)
-            // }
             timer.current=setInterval(() => changeImage(), 2000);
             document.removeEventListener("click", nextFunction);
             document.removeEventListener("click", prevFunction);

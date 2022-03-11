@@ -1,0 +1,62 @@
+// HomeRecent CSS
+.section{
+    .section-title.title{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        .discovery-btn{
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            .icon{
+                font-size: 16px;
+                top: 0;
+                margin-left: 6px;
+            }
+        }
+        
+    }
+    .title.is-2{
+        font-size: 20px;
+    }
+    .carousel-wrapper{
+        position: relative;
+        .carousel{
+            display: flex;
+            position: relative;
+            margin: 0 -15px;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            .carousel__container{
+                display: flex;
+                z-index: 3;
+                width: 100%;             
+            }
+        }
+    }
+}
+.mar-t-30{
+    margin-top: 30px;
+}
+.is-fullhd-1\.4, .is-fullhd-1\.4, .is-desktop-2, .is-touch-20 .is-tablet-20{
+    position: relative;
+    min-height: 1px;
+    padding-left: 14px;
+    padding-right: 14px;
+    float: left;
+    flex-shrink: 0;
+}
+@media screen and (min-width: 1350px) and (max-width: 1637px) {
+    .is-widescreen-1\4{
+        width: 14.28571%;
+    }
+}
+.is-fullhd-1\.4{
+    width: 14.28571%;
+}

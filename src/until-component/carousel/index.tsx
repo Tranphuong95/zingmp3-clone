@@ -11,7 +11,7 @@ type ListProps = {
     imgUrl: string
 }
 
-const Carousel: React.FC<{ list: Array<ListProps> }> = ({ list }) => {
+const Carousel: React.FC<{ list: Array<ListProps>, timeDelay?: number }> = ({ list, timeDelay}) => {
     const timer:any=useRef(null);
     useEffect(() => {
         const galleryContainer = document.querySelector<HTMLElement>("#gallery-container")
@@ -54,7 +54,7 @@ const Carousel: React.FC<{ list: Array<ListProps> }> = ({ list }) => {
             }
         }
         changeImage();
-        timer.current=setInterval(() => changeImage(), 2000);
+        timer.current=setInterval(() => changeImage(), timeDelay);
         const prevFunction=()=>{
             if(firstPrev===0){
                 currentSelectIndex-=2;
@@ -63,7 +63,7 @@ const Carousel: React.FC<{ list: Array<ListProps> }> = ({ list }) => {
                 currentSelectIndex--;
             }
             changeImage(true)
-           timer.current=setInterval(() => changeImage(), 2000);
+           timer.current=setInterval(() => changeImage(), timeDelay);
             document.removeEventListener("click", nextFunction);
             document.removeEventListener("click", prevFunction);
         }
@@ -76,7 +76,7 @@ const Carousel: React.FC<{ list: Array<ListProps> }> = ({ list }) => {
             }
             
             changeImage(true)
-            timer.current=setInterval(() => changeImage(), 2000);
+            timer.current=setInterval(() => changeImage(), timeDelay);
             document.removeEventListener("click", nextFunction);
             document.removeEventListener("click", prevFunction);
         }
@@ -133,5 +133,7 @@ const Carousel: React.FC<{ list: Array<ListProps> }> = ({ list }) => {
         </div>
     )
 }
-
+Carousel.defaultProps={
+    timeDelay: 3000
+}
 export default Carousel

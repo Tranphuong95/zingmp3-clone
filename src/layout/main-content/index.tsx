@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom"
 import styles from "../../styles/layout/mainpage/mainpage.module.scss";
 
 //import component
-import Discover from './main-components/Discover';
+import Discover from './main-components/discover-components/Discover';
 const MainContent = () => {
   return (
     <div className={styles['mainpage']}>

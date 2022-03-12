@@ -4,6 +4,7 @@
     position: relative;
     padding: 0 10px;
     transition: transform 0.3s ease 0.1s;
+    // card item
     .livestream-item{
         overflow: hidden;
         border-radius: 8px;
@@ -89,7 +90,102 @@
     .card{
         width: 100%;
     }
+    //card play list
+    .playlist-wrapper{
+        .card-image{
+            .actions-container{
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                .actions{
+                    height: 50px;
+                }
+                .playlist-actions{
+                    width: 100%;
+                    justify-content: space-evenly;
+                    .animation-like{
+                        .icon{
+                            font-size: 20px;
+                            padding: 5px;
+                            border-radius: 50%;
+
+                            pointer-events: none; //ngan bat target la icon
+                        }
+                        .icon.is-like-full{
+                            color: var(--purple-primary)!important;
+                        }
+                        .icon:last-child{
+                            transition: all .5s;
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            z-index: -1;
+                            opacity: 1;
+                        }
+                        .icon:first-child{
+                            background-color: var(--hover-tooltip-opacity);
+
+                        }
+                    }
+                    .animation-like.active{
+                        .icon:last-child{
+                            opacity: 0;
+                            visibility: visible;
+                            transform: translateY(-80px);
+                            pointer-events: none;
+                        }
+                    }
+                    .animation-like.done{
+                        .icon:last-child{
+                            transition: none;
+                            visibility: hidden;
+                        }
+                    }
+                    
+                    .is-hover-circle{
+                        .icon-ellipsis{
+                            font-size: 20px;
+                            padding: 5px;
+                            border-radius: 50%;
+                        }
+                        .icon-ellipsis:hover{
+                            background-color: var(--hover-tooltip-opacity);
+                        }
+                    }
+                    
+                }
+            }
+        }
+        .card-image:hover{
+            cursor: pointer;
+        }
+        .card-image.active{
+            visibility: visible;
+            .actions{
+                visibility: visible;
+            }
+        }
+        .card-image:hover .opacity{
+            visibility: visible;
+        }
+        .card-image:hover .actions{
+           visibility: visible;
+        }
+        
+    }
+    
 }
+.actions.playlist-actions .icon.action-play{
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #fff;
+    border-radius: 50%;
+  }
 .is-fullhd-1\.4, .is-fullhd-1\.4, .is-desktop-2, .is-touch-20 .is-tablet-20{
     position: relative;
     min-height: 1px;

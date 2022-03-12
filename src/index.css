@@ -21,6 +21,7 @@
   --border-primary: hsla(0,0%,100%,0.1);
   --dark-alpha-50: rgba(0,0,0,0.5);
   --padding-section: 59px;
+  --hover-tooltip-opacity: hsla(0,0%,100%,0.3);
 
   /* --border-primary: rgba(0,0,0,0.1); */
 
@@ -114,6 +115,10 @@ button, optgroup, select{
   background-repeat: no-repeat;
   background-position: 50%;
 }
+/* css Link router */
+.link-router{
+  color: var(--white);
+}
 /* layout css */
 .layout{
   display: flex;
@@ -181,4 +186,31 @@ h1.title, h3.title{
 .icon{
   line-height: 66%;
   display: inline-block;
+}
+.actions{
+  position: absolute;
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    z-index: 98;
+    transform: translateX(-50%) translateY(-50%);
+    display: -moz-flex;
+    display: flex;
+    -moz-justify-content: space-around;
+    -ms-justify-content: space-around;
+    -o-justify-content: space-around;
+    justify-content: space-around;
+    -ms-flex-pack: distribute;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    -ms-flex-align: center;
+    visibility: hidden;
+    width: 80%;
+}
+.btn.active:hover, .btn:hover{
+  -webkit-filter: brightness(.9);
+  filter: brightness(.9);
 }

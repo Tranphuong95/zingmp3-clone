@@ -151,6 +151,9 @@ button, optgroup, select{
 .is-upper{
   text-transform: uppercase;
 }
+.is-hidden{
+  display: none;
+}
 .pt-15{
   padding-top: 15px!important;
 }

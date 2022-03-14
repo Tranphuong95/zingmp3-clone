@@ -39,6 +39,33 @@
                 width: 100%;             
             }
         }
+        .carousel-control-prev, .carousel-control-next{
+            position: absolute;
+            text-align: center;
+            top: -38px;
+            left: auto;
+            width: 26px;
+            height: 26px;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            cursor: pointer;
+            .disabled{
+                opacity: 1;
+                cursor: default;
+                user-select: none;
+                -ms-user-select: none;
+                -webkit-user-select: none;
+            }
+
+
+        }
+        .carousel-control-prev{
+            right: 45px;
+        }
+        .carousel-control-next{
+            right: 0;
+        }
     }
 }
 .mar-t-30{

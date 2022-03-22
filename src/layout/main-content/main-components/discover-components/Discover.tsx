@@ -20,7 +20,7 @@ const Discover = () => {
   {
     textContent: "Rap Việt Cực Chất",
     href: "/album/Rap-Viet-Cuc-Chat-16-Typh-Tage-Seachains-Lil-Wuyn/ZU6Z07DU.html",
-    imgUrl: "//photo-resize-zmp3.zadn.vn/w320_r1x1_webp/cover/4/1/7/3/417311b789dbe8a5d8aa82eabf059625.jpg",
+    imgUrl: "https://photo-resize-zmp3.zadn.vn/w320_r1x1_webp/cover/4/1/7/3/417311b789dbe8a5d8aa82eabf059625.jpg",
     isPlaylist: true
   },
   {

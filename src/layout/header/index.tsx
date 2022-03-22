@@ -5,6 +5,8 @@ import { faArrowLeftLong, faArrowRightLong, faSearch, faShirt, faGem, faArrowUpF
 import ToolTip from '../../until-component/tooltip';
 
 const Header: React.FC = () => {
+    const isLogin: boolean = false;
+
     const STYLE_RIGHT_HEADER_ICON = { fontSize: 16, color: "white" };
     const SUGGEST_LIST_ICON = { fontSize: 12, marginRight: 10, color: "var(--text-secondary)" };
     const [isFocus, setFocus] = useState(() => false);
@@ -19,6 +21,9 @@ const Header: React.FC = () => {
     })
     const handleFocus = () => {
         setFocus(true)
+    }
+    const handleLogin=()=>{
+        window.open('https://id.zalo.me/account?continue=https%3A%2F%2Fzingmp3.vn%2F%3FisZaloPopupLogin%3D1','_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes')
     }
     return (
         <header className={styles.header}>
@@ -119,15 +124,27 @@ const Header: React.FC = () => {
                             </button>
                         </ToolTip>
                     </div>
-                    <a href='/mymusic'>
-                        <div className={styles["avatar-frame"]}>
-                            <button className={`btn`} tabIndex={0}>
-                                <figure className={`${styles.image} ${styles["is-38x38"]} ${styles["is-rounded"]}`}>
+                    {isLogin ? (
+                        <a href='/mymusic'>
+                            <div className={styles["avatar-frame"]}>
+                                <button className={`btn`} tabIndex={0}>
+                                    <figure className={`${styles.image} is-38x38 is-rounded`}>
+                                        <img src="https://s120-ava-talk.zadn.vn/9/0/2/8/0/120/841e540ce5fb31cbee4fcf9d4092bad5.jpg" alt="" />
+                                    </figure>
+                                </button>
+                            </div>
+                        </a>
+                    ) : (
+                        <div className={styles['login-container']}>
+                            <button className={`btn`} tabIndex={0} onClick={handleLogin}>
+                                <figure className={`${styles.image} is-38x38 is-rounded`}>
                                     <img src="https://s120-ava-talk.zadn.vn/9/0/2/8/0/120/841e540ce5fb31cbee4fcf9d4092bad5.jpg" alt="" />
                                 </figure>
                             </button>
                         </div>
-                    </a>
+                    )
+                    }
+
                 </div>
             </div>
         </header>

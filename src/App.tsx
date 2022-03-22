@@ -4,6 +4,7 @@ import SideBar from './layout/side-bar';
 import Header from './layout/header';
 import MainContent from './layout/main-content';
 import PlayBar from './layout/play-bar';
+import Auth from './layout/auth';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Header/>
       <MainContent/>
       <PlayBar/>
+      <Auth/>
     </div>
     </>
   );

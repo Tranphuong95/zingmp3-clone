@@ -1,0 +1,105 @@
+.auth-container{
+    display: none;
+    flex-direction: column;
+    min-width: 400px;
+    min-height: 600px;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    background-color: var(--primary-bg);
+    border-radius: 5px;
+    z-index: 1000;
+    overflow: hidden;
+    .form-close{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        padding: 10px;
+        top: 20px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+    .form-close:hover{
+        background-color: var(--alpha-bg);
+    }
+    h3{
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+    .choose-auth{
+        display: flex;
+        button{
+            width: 50%;
+            display: flex;
+            position: relative;
+            justify-content: center;
+            padding: 10px;
+            font-size: 1.3rem;
+            
+        }
+        button.active::before{
+            content: "";
+            display: block;
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            height: 5px;
+            background-color: white;
+            border-radius: 5px;
+        }
+        
+    }
+    .form-auth-container{
+        position: relative;
+        margin-top: 20px;
+        .sign-in{
+            left: 0;
+            // left: calc(-100% - 20px)
+        }
+        .register{
+            left: calc(100% + 20px);
+            // left: 0;
+        }
+        form{
+            width: 100%;
+            position: absolute;
+            max-height: 400px;
+            overflow: hidden scroll;
+            .input-group{
+                margin: 10px 0;
+                label, input{
+                    display: block;
+                }
+                label{
+                    font-size: 1.1rem;
+                    margin-bottom: 10px;
+                }
+                input{
+                    min-width: 100%;
+                    padding: 10px 20px;
+                    font-size: 1rem;
+                    color: white;
+                    background-color: rgba(255, 255, 255, .4);
+                    // border-radius: 999px;
+                    border-radius: 5px;
+                }
+                input::placeholder{
+                    color: white;
+                    font-size: 1rem;
+                    opacity: .7;
+                }
+            }
+        }
+        
+    }
+    
+}
+.auth-container.active{
+    display: flex;
+}

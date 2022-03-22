@@ -100,6 +100,15 @@ button, optgroup, select{
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+/* header css */
+.is-38x38{
+  width: 38px;
+  height: 38px;
+}
+.is-rounded{
+  border: 0;
+  border-radius: 50%;
+}
 /* icon play */
 .icon.ic-svg-play-circle{
   background-image: url("https://zjs.zadn.vn/zmp3-desktop/releases/v1.6.2/static/media/play.81e7696e.svg");

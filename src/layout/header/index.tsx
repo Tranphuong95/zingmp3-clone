@@ -3,6 +3,7 @@ import styles from '../../styles/layout/header.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong, faArrowRightLong, faSearch, faShirt, faGem, faArrowUpFromBracket, faGear, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons'
 import ToolTip from '../../until-component/tooltip';
+import Auth from '../auth';
 
 const Header: React.FC = () => {
     const isLogin: boolean = false;
@@ -10,6 +11,7 @@ const Header: React.FC = () => {
     const STYLE_RIGHT_HEADER_ICON = { fontSize: 16, color: "white" };
     const SUGGEST_LIST_ICON = { fontSize: 12, marginRight: 10, color: "var(--text-secondary)" };
     const [isFocus, setFocus] = useState(() => false);
+    const [open, setOpen]=useState(()=>false);
     useEffect(() => {
         const formSearch = document.querySelector<HTMLElement>("#form-search");
         const documentClick = (e: MouseEvent) => {
@@ -22,8 +24,12 @@ const Header: React.FC = () => {
     const handleFocus = () => {
         setFocus(true)
     }
-    const handleLogin=()=>{
-        window.open('https://id.zalo.me/account?continue=https%3A%2F%2Fzingmp3.vn%2F%3FisZaloPopupLogin%3D1','_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes')
+    const handleOpenAuthForm=()=>{
+        setOpen(true)
+        // window.open('https://id.zalo.me/account?continue=https%3A%2F%2Fzingmp3.vn%2F%3FisZaloPopupLogin%3D1','_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes')
+    };
+    const handleCloseAuthForm=(value:boolean)=>{
+        setOpen(value)
     }
     return (
         <header className={styles.header}>
@@ -136,7 +142,7 @@ const Header: React.FC = () => {
                         </a>
                     ) : (
                         <div className={styles['login-container']}>
-                            <button className={`btn`} tabIndex={0} onClick={handleLogin}>
+                            <button className={`btn`} tabIndex={0} onClick={handleOpenAuthForm}>
                                 <figure className={`${styles.image} is-38x38 is-rounded`}>
                                     <img src="https://s120-ava-talk.zadn.vn/9/0/2/8/0/120/841e540ce5fb31cbee4fcf9d4092bad5.jpg" alt="" />
                                 </figure>
@@ -147,6 +153,7 @@ const Header: React.FC = () => {
 
                 </div>
             </div>
+            <Auth open={open} onClose={handleCloseAuthForm}/>
         </header>
     )
 }

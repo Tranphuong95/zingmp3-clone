@@ -61,10 +61,22 @@
         .sign-in{
             left: 0;
             // left: calc(-100% - 20px)
-        }
+        };
         .register{
             left: calc(100% + 20px);
             // left: 0;
+        };
+        .button-auth{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            .btn-auth{
+                padding: 10px 20px;
+                background-color: var(--alpha-layout-bg);
+                border-radius: 999px;
+                font-size: 1rem;
+            }
         }
         form{
             width: 100%;

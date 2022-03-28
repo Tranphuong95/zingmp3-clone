@@ -34,7 +34,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { setMessage } from './message';
 import AuthService from './../../services/auth.service';
 
-const user: {token: string}=JSON.parse(localStorage.getItem("profile")||"");
+const user: {token: string}=localStorage.getItem("profile") && JSON.parse(localStorage.getItem("profile")||"");
 export interface RegisterType{
     userName: string,
     email: string,
@@ -84,8 +84,12 @@ export const login=createAsyncThunk(
         }
     }
 );
-export const logout=createAsyncThunk("auth/logout",async () => {
-    await AuthService.logout();
+// export const logout=createAsyncThunk("auth/logout",async () => {
+//     await AuthService.logout();
+// });
+export const logout=createAsyncThunk("auth/logout",() => {
+    console.log("11111")
+    AuthService.logout();
 });
 const initialState:AuthFeatureType=user?{isLoggedIn: true, user, isLoading: false}:{isLoggedIn:false, isLoading: false, user: {}};
 const authSlice=createSlice({

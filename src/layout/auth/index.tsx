@@ -1,8 +1,9 @@
 import "./index.scss";
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ReactLoading from 'react-loading';
 import { login, register } from "./../../features/auth/auth";
 
 interface formLogin {
@@ -48,7 +49,6 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
         // })
         const formSignIn = document.querySelector<HTMLElement>(".sign-in");
         const formRegister = document.querySelector<HTMLElement>(".register");
-        console.log(formSignIn);
         if (val && isSignInForm !== val) {
             if (formSignIn) {
                 formSignIn.style.transform = "";
@@ -98,8 +98,11 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
         if(!email||!password)return;
         setLoading(true);
         try {
-            const resultAction = await dispatch(login({ email, password }));
-            console.log(resultAction)
+            const resultAction:any = await dispatch(login({ email, password }));
+            if(resultAction && resultAction?.payload?.user?.accessToken){
+                onClose(false);
+            };
+            setLoginValues(initialStateLogin);
             setLoading(false)
         } catch (error) {
             setLoading(false)
@@ -114,8 +117,11 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
         if(!userName || !email||!phoneNumber|| typeof phoneNumber!=="number"||!password) return;
         setLoading(true);
         try {
-            const resultAction = await dispatch(register({userName, email, phoneNumber, password }));
-            console.log(resultAction)
+            const resultAction:any= await dispatch(register({userName, email, phoneNumber, password }));
+            if(resultAction && resultAction?.payload?.accessToken){
+                onClose(false);
+            };
+            setRegisterValues(initialStateRegister)
             setLoading(false)
         } catch (error) {
             setLoading(false)
@@ -189,6 +195,8 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
                 </form>
             </div>
 
+                    {/* loading */}
+                    {loading && <ReactLoading type={"spin"} color="#fff" className="loading"/>}
         </div>
     )
 }

@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import api from "./api";
 
 const API_BASE = "http://localhost:8080/api/auth/";
 type RegisterType = {
@@ -9,24 +10,31 @@ type RegisterType = {
 }
 type LoginType = { email: string, password: string }
 const register = ({ userName, email, phoneNumber, password }: RegisterType) => {
-    return axios.post(API_BASE + "singup", {
+    console.log(api)
+    return api.post(API_BASE + "signup", {
         userName, email, phoneNumber, password
-    })
-};
-const login = ({ email, password }:LoginType) => {
-    return axios.post(API_BASE+"signin", {
-        email, password
     }).then(res=>{
         if(res.data.accessToken){
             localStorage.setItem("profile", JSON.stringify(res.data))
         }
+        return res.data;
+    }).catch((err)=> console.log(err))
+};
+const login = ({ email, password }: LoginType) => {
+    return api.post(API_BASE + "signin", {
+        email, password
+    }).then(res => {
+        if (res.data.accessToken) {
+            localStorage.setItem("profile", JSON.stringify(res.data))
+        }
         return res.data
     })
+    .catch((err)=> console.log(err))
 };
-const logout=()=>{
+const logout = () => {
     localStorage.removeItem("profile")
 };
-const AuthService={
+const AuthService = {
     register, login, logout
 };
 export default AuthService;

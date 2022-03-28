@@ -112,6 +112,14 @@ button, optgroup, select{
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+/* loading */
+.loading{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 999;
+}
 /* header css */
 .is-38x38{
   width: 38px;

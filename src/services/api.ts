@@ -30,11 +30,12 @@ instance.interceptors.response.use(
     const originalConfig = err.config;
     if (originalConfig?.url !== "/api/auth/signin" && originalConfig?.url !== "/api/auth/signup" && err.response) {
       // Access Token was expired
-      if (err.response.status === 401 && !originalConfig._retry) {
+      const refreshToken:string=TokenService.getLocalRefreshToken();
+      if (refreshToken && err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
         try {
-          const rs = await instance.post("/auth/refreshtoken", {
-            refreshToken: TokenService.getLocalRefreshToken(),
+          const rs = await instance.post("/api/auth/refreshtoken", {
+            refreshToken: refreshToken,
           });
           const { accessToken } = rs.data;
           TokenService.updateLocalAccessToken(accessToken);

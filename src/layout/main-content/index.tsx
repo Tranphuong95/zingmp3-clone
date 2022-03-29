@@ -4,6 +4,8 @@ import styles from "../../styles/layout/mainpage/mainpage.module.scss";
 
 //import component
 import Discover from './main-components/discover-components/Discover';
+import PageNotFound from './../../page404/PageNotFound';
+import TestAPi from './main-components/test-api/TestAPi';
 const MainContent = () => {
   return (
     <div className={styles['mainpage']}>
@@ -12,6 +14,8 @@ const MainContent = () => {
         <main className={styles.section} id="body-scroll" style={{ position: "absolute", inset: 0, overflow: "hidden scroll", marginRight: -6, marginBottom: 0 }}>
           <Routes>
             <Route path="/" element={<Discover />} />
+            <Route path="/test-api" element={<TestAPi/>}/>
+            <Route path='*' element={<PageNotFound/>}/>
           </Routes>
         </main>
 

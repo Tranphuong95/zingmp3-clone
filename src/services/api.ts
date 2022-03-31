@@ -1,4 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
+import decode from 'jwt-decode';
 import TokenService from "./token.service";
 const baseURL="http://localhost:8080/";
 const config:AxiosRequestConfig ={
@@ -28,10 +29,22 @@ instance.interceptors.response.use(
   },
   async (err) => {
     const originalConfig = err.config;
+    let isExpired=true;
     if (originalConfig?.url !== "/api/auth/signin" && originalConfig?.url !== "/api/auth/signup" && err.response) {
       // Access Token was expired
       const refreshToken:string=TokenService.getLocalRefreshToken();
-      if (refreshToken && err.response.status === 401 && !originalConfig._retry) {
+      const accessToken:string=TokenService.getLocalAccessToken();
+      console.log(accessToken, isExpired)
+      if (accessToken) {
+        const decodeToken: any = decode(accessToken);
+        const exp = decodeToken.exp;
+        console.log(exp*1000, new Date().getTime())
+        if (exp * 1000 > new Date().getTime()) {
+          isExpired=false  
+        };
+      }
+      console.log(isExpired)
+      if (isExpired && refreshToken && err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
         try {
           const rs = await instance.post("/api/auth/refreshtoken", {
@@ -45,6 +58,7 @@ instance.interceptors.response.use(
         }
       }
     }
+    isExpired=true;
     return Promise.reject(err);
   }
 );

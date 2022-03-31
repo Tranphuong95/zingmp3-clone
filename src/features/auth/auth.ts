@@ -55,9 +55,10 @@ export const register=createAsyncThunk(
     "auth/register",
     async({userName, email, phoneNumber, password}:RegisterType, thunkAPI)=>{
         try {
-            const response=await AuthService.register({userName, email, phoneNumber, password});
-            thunkAPI.dispatch(setMessage(response.data.message));
-            return response.data;
+            const data=await AuthService.register({userName, email, phoneNumber, password});
+            console.log(data)
+            thunkAPI.dispatch(setMessage(data?.message));
+            return data;
         } catch (error) {
             if(error instanceof Error){
                 const message=error?.message||error.toString();
@@ -72,6 +73,7 @@ export const login=createAsyncThunk(
     async({email, password}:LoginType, thunkAPI)=>{
         try {
             const data=await AuthService.login({email, password});
+            thunkAPI.dispatch(setMessage(data?.message));
             return {
                 user: data
             }

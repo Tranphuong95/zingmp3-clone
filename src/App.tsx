@@ -6,9 +6,9 @@ import Header from './layout/header';
 import MainContent from './layout/main-content';
 import PlayBar from './layout/play-bar';
 import decode from 'jwt-decode';
+import { useDispatch, useSelector } from "react-redux";
 
 import { logout } from './features/auth/auth';
-import { useDispatch } from "react-redux";
 import TokenService from './services/token.service';
 
 const PublishPage = () => {
@@ -32,6 +32,7 @@ const AdminPage=()=>{
 }
 function App() {
   const dispatch = useDispatch();
+  const state=useSelector(state=>console.log(state));
   useEffect(() => {
     document.onmousemove = function () {
       const token = localStorage.getItem("profile") && JSON.parse(localStorage.getItem("profile") || "");

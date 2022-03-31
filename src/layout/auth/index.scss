@@ -72,8 +72,10 @@
             align-items: center;
             margin: 20px 0;
             .btn-auth{
+                width: 100%;
                 padding: 10px 20px;
-                background-color: var(--alpha-layout-bg);
+                // background-color: var(--alpha-layout-bg);
+                background-image: linear-gradient(to right, #935ce0, var(--purple-primary));
                 border-radius: 999px;
                 font-size: 1rem;
             }

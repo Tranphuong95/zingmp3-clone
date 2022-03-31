@@ -35,6 +35,11 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        if(!open){
+            setSignInForm(true);
+        }
+    }, [open])
     const handleChangeForm = (e: React.MouseEvent, val: boolean) => {
         // const chooseAuth=document.querySelector<HTMLElement>(".choose-auth");
         // const buttonList=chooseAuth?.querySelectorAll<HTMLElement>("button");
@@ -86,7 +91,7 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
         const value = elm.value;
         setLoginValues(loginValue => ({ ...loginValue, [name]: value }))
     };
-    const handleChangeRegister=(e: React.ChangeEvent<HTMLInputElement>)=>{
+    const handleChangeRegister = (e: React.ChangeEvent<HTMLInputElement>) => {
         const elm = e.target;
         const name = elm.name;
         const value = elm.value;
@@ -95,11 +100,11 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
     const handleLogin = async (e: React.MouseEvent) => {
         e.preventDefault();
         const { email, password } = loginValues;
-        if(!email||!password)return;
+        if (!email || !password) return;
         setLoading(true);
         try {
-            const resultAction:any = await dispatch(login({ email, password }));
-            if(resultAction && resultAction?.payload?.user?.accessToken){
+            const resultAction: any = await dispatch(login({ email, password }));
+            if (resultAction && resultAction?.payload?.user?.accessToken) {
                 onClose(false);
             };
             setLoginValues(initialStateLogin);
@@ -109,16 +114,17 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
         }
 
     };
-    const handleRegister=async(e:React.MouseEvent)=>{
+    const handleRegister = async (e:React.FormEvent) => {
         e.preventDefault();
-        const { userName, email, password} = registerValues;
-        const strPhoneNumber=registerValues.phoneNumber;
-        const phoneNumber= Number(strPhoneNumber);
-        if(!userName || !email||!phoneNumber|| typeof phoneNumber!=="number"||!password) return;
+        const { userName, email, password } = registerValues;
+        const strPhoneNumber = registerValues.phoneNumber;
+        const phoneNumber = Number(strPhoneNumber);
+        if (!userName || !email || !phoneNumber || typeof phoneNumber !== "number" || !password) return;
         setLoading(true);
         try {
-            const resultAction:any= await dispatch(register({userName, email, phoneNumber, password }));
-            if(resultAction && resultAction?.payload?.accessToken){
+            const resultAction: any = await dispatch(register({ userName, email, phoneNumber, password }));
+            console.log(resultAction)
+            if (resultAction && resultAction?.payload?.accessToken) {
                 onClose(false);
             };
             setRegisterValues(initialStateRegister)
@@ -158,45 +164,45 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
                         <button className='btn btn-auth' onClick={handleLogin}>Đăng nhập</button>
                     </div>
                 </form>
-                <form className='register'>
+                <form className='register' onSubmit={handleRegister}>
                     <div className='input-group'>
                         {/* <label>
                         Tên
                     </label> */}
-                        <input type="text" placeholder='Nhập tên của bạn' name="userName" onChange={handleChangeRegister}/>
+                        <input type="text" placeholder='Nhập tên của bạn' name="userName" onChange={handleChangeRegister} />
                     </div>
                     <div className='input-group'>
                         {/* <label>
                         Email
                     </label> */}
-                        <input type="email" placeholder='Nhập email của bạn' name="email" onChange={handleChangeRegister}/>
+                        <input type="email" placeholder='Nhập email của bạn' name="email" onChange={handleChangeRegister} />
                     </div>
                     <div className='input-group'>
                         {/* <label>
                         Số điện thoại
                     </label> */}
-                        <input type="number" placeholder='Nhập số điện thoại của bạn' name="phoneNumber" onChange={handleChangeRegister}/>
+                        <input type="number" placeholder='Nhập số điện thoại của bạn' name="phoneNumber" onChange={handleChangeRegister} />
                     </div>
                     <div className='input-group'>
                         {/* <label>
                         Mật khẩu
                     </label> */}
-                        <input type="password" placeholder='Nhập mật khẩu' name="password" onChange={handleChangeRegister}/>
+                        <input type="password" placeholder='Nhập mật khẩu' name="password" onChange={handleChangeRegister} />
                     </div>
                     <div className='input-group'>
                         {/* <label>
                         Mật khẩu xác minh
                     </label> */}
-                        <input type="password" placeholder='Nhập mật khẩu xác minh' name="validatePassword" onChange={handleChangeRegister}/>
+                        <input type="password" placeholder='Nhập mật khẩu xác minh' name="validatePassword" onChange={handleChangeRegister} />
                     </div>
                     <div className='button-auth'>
-                        <button className='btn btn-auth' onClick={handleRegister}>Đăng ký</button>
+                        <button className='btn btn-auth'>Đăng ký</button>
                     </div>
                 </form>
             </div>
 
-                    {/* loading */}
-                    {loading && <ReactLoading type={"spin"} color="#fff" className="loading"/>}
+            {/* loading */}
+            {loading && <ReactLoading type={"spin"} color="#fff" className="loading" />}
         </div>
     )
 }

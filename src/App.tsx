@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import styles from "./styles/layout.module.scss";
 import SideBar from './layout/side-bar';
@@ -6,11 +6,20 @@ import Header from './layout/header';
 import MainContent from './layout/main-content';
 import PlayBar from './layout/play-bar';
 import decode from 'jwt-decode';
-import { useDispatch, useSelector } from "react-redux";
-
-import { logout } from './features/auth/auth';
+import AdminPage from './components/admin-page/AdminPage';
+import api from "./services/api";
+import { AUTH_URL } from './config/urlConfig';
 import TokenService from './services/token.service';
+import { PrivateLogin, PrivateRoute } from './until-component/PrivateRoute';
+import LoginPage from './components/LoginPage';
 
+type profileType = {
+  id: string,
+  userName: string,
+  email: string,
+  phoneNumber: number | null,
+  roles: [] | string
+}
 const PublishPage = () => {
   return (
     <div className={`${styles.section} layout`}>
@@ -21,18 +30,17 @@ const PublishPage = () => {
     </div>
   )
 }
-const AdminPage=()=>{
-  const token=TokenService.getLocalAccessToken();
-  if(!token) return null;
-  return (
-    <div>
-      <h1>This is admin page</h1>
-    </div>
-  )
-}
+
 function App() {
-  const dispatch = useDispatch();
-  const state=useSelector(state=>console.log(state));
+  const initialStateProfile = {
+    id: "",
+    userName: "",
+    email: "",
+    phoneNumber: null,
+    roles: ""
+  }
+  const [profile, setProfile] = useState<profileType>(() => initialStateProfile);
+  const accessToken = TokenService.getLocalAccessToken();
   useEffect(() => {
     document.onmousemove = function () {
       const token = localStorage.getItem("profile") && JSON.parse(localStorage.getItem("profile") || "");
@@ -46,6 +54,18 @@ function App() {
     }
   });
 
+  useEffect(() => {
+    if (accessToken) {
+      getProfile();
+    }
+  }, [accessToken])
+  async function getProfile() {
+    const result = await api.get(AUTH_URL + "profile");
+    if (result?.data?.profile?.id) {
+      setProfile(result?.data?.profile)
+    }
+    // setProfile(resultProfile);
+  };
   return (
     <>
       {/* <div className={`${styles.section} layout`}>
@@ -54,10 +74,11 @@ function App() {
         <MainContent />
         <PlayBar />
       </div> */}
-    <Routes>
-      <Route path="/*" element={<PublishPage/>}/>
-      <Route path="/admin" element={<AdminPage/>}/>
-    </Routes>
+      <Routes>
+          <Route path="/*" element={<PrivateRoute><PublishPage /></PrivateRoute>} />
+          <Route path='/login' element={<PrivateLogin><LoginPage/></PrivateLogin>}/>
+        {profile.roles === "admin" && <Route path="/admin" element={<AdminPage profile={profile} />} />}
+      </Routes>
     </>
   );
 }

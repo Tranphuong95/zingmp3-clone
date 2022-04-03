@@ -1,8 +1,8 @@
 // import axios from "axios";
 import { filtersObject } from "./../until/filterObject";
 import api from "./api";
+import { AUTH_URL } from "./../config/urlConfig";
 
-const API_BASE = "http://localhost:8080/api/auth/";
 type RegisterType = {
     userName: string,
     email: string,
@@ -12,7 +12,7 @@ type RegisterType = {
 type LoginType = { email: string, password: string }
 const register = ({ userName, email, phoneNumber, password }: RegisterType) => {
     console.log(api)
-    return api.post(API_BASE + "signup", {
+    return api.post(AUTH_URL + "signup", {
         userName, email, phoneNumber, password
     }).then(res=>{
         if(res.data.accessToken){
@@ -24,7 +24,7 @@ const register = ({ userName, email, phoneNumber, password }: RegisterType) => {
     }).catch((err)=> console.log(err))
 };
 const login = ({ email, password }: LoginType) => {
-    return api.post(API_BASE + "signin", {
+    return api.post(AUTH_URL + "signin", {
         email, password
     }).then(res => {
         if (res.data.accessToken) {

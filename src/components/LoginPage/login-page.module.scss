@@ -1,0 +1,247 @@
+// @import 'https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700,900';
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #f0f2f5;
+    background-image: url(../../asset/images/backgound-login.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+
+    font-size: 1.2em;
+    font-family: titillium web,sans-serif;
+    color: #44525f;
+
+    .authfy-container {
+        display: flex;
+        width: 790px;
+        background-color: green;
+
+        .authfy-panel__left {
+            width: 42%;
+            background-color: rgba(38, 43, 72, .92);
+            color: var(--white);
+            padding: 0 15px;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+
+            .brand-col {
+                display: table;
+                width: 100%;
+                padding: 25px;
+                height: 500px;
+
+                .headline {
+                    display: table-cell;
+                    vertical-align: middle;
+
+                    .brand-logo {
+                        a {
+                            img {
+                                vertical-align: middle;
+                                object-fit: cover;
+                            }
+                        }
+                    }
+
+                    p {}
+
+                    .social-buttons {
+                        .btn-social {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 100%;
+                            margin-top: 16px;
+                            padding: 12px;
+                            border-radius: 5px;
+
+                            .social-icon {
+                                font-size: 14px;
+                            }
+
+                            span {
+                                margin-left: 5px;
+                            }
+                        }
+
+                        .face-btn {
+                            background-color: #3b5998;
+                        }
+
+                        .twitter-btn {
+                            background-color: #00aced;
+                        }
+
+                        .google-btn {
+                            background-color: #c32f10;
+                        }
+                    }
+                }
+            }
+        }
+
+        .authfy-panel__right {
+            position: relative;
+            width: 58%;
+            padding: 15px;
+            background-color: var(--white);
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            .authfy-login {
+                position: relative;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+                height: 500px;
+
+                .authfy-panel {
+                    margin-top: 20px;
+
+                    .authfy-heading {
+                        margin-bottom: 30px;
+
+                        .authfy-title {
+                            margin: 20px 0 10px 0;
+                            font-weight: 700;
+                        }
+
+                        .authfy-p {
+                            margin: 0 0 10px;
+
+                            // .btn-panel__sigup {
+                            //     font-size: 1em;
+                            //     color: #4f77ff
+                            // }
+
+                            // .btn-panel__sigup:hover {
+                            //     text-decoration: underline;
+                            // }
+                        }
+                    }
+
+                    .row {
+                        text-align: left;
+
+                        form {
+                            .form-group {
+                                width: 100%;
+                                margin-bottom: 15px;
+
+                                .form-control {
+                                    display: block;
+                                    width: 100%;
+                                    height: 50px;
+                                    padding: 12px 22px;
+                                    border: 1px solid #bcc2ce;
+                                    border-radius: 4px;
+                                    outline: none;
+                                    font-size: 18px;
+                                    color: #333;
+                                    box-shadow: 0 3px 6px 0 rgba(0 0 0 /10%), 0 0 2px 0 rgba(0 0 0 /10%);
+                                    -webkit-box-shadow: 0 3px 6px 0 rgba(0 0 0 /10%), 0 0 2px 0 rgba(0 0 0 /10%);                                   
+                                }
+
+                                .form-control:focus {
+                                    border-color: #4f77ff;
+                                    z-index: 2;
+                                    outline: 0;
+                                    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+                                    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+                                }
+                                .pwdMask{
+                                    position: relative;
+                                    .pwd-toggle{
+                                        position: absolute;
+                                        top:50%;
+                                        right: 15px;
+                                        z-index: 2;
+                                        color: #ccc;
+                                        transform: translateY(-50%);
+                                        -webkit-transform: translateY(-50%);
+                                        cursor: pointer;
+                                    }
+                                }
+                                .btn-signin{
+                                    width: 100%;
+                                    padding: 15px;
+                                    border-radius: 5px;
+                                    font-size: 18px;
+                                    background-color: #4f77ff;
+                                    color: var(--white);
+                                }
+                            }
+                            .remember-password{
+                                display: flex;
+                                justify-content: space-between;
+                                font-size: 16px;
+                                margin: 20px 0 10px 0;
+                                color: #333;
+                                font-weight: 500;
+                                div{
+                                    padding: 10px 0;
+                                    .text-label{
+                                        margin-left: 5px;
+                                    }
+                                    .btn-forgot__password{
+                                        font-size: 16px;
+                                        font-weight: 500;
+                                        color: #4f77ff;
+                                    }
+                                    .btn-forgot__password:hover{
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .panel-login, .panel-signup, .panel-forgot {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    padding: 20px;
+                    transition: all 0.5s;
+                    opacity: 0;
+                    transform: translateX(-100%);
+                    -webkit-transform: translateX(-100%);
+                }
+            }
+        }
+    }
+}
+
+.btn-panel__sigup, .btn-panel__login {
+    font-size: 1em;
+    color: #4f77ff
+}
+
+.btn-panel__sigup:hover, .btn-panel__login:hover{
+    text-decoration: underline;
+}
+// .form-control{
+//     display: block;
+//     width: 100%;
+//     height: 34px;
+//     padding: 6px 12px;
+//     font-size: 14px;
+//     line-height: 1.42857143;
+//     color: #555;
+//     background-color: #fff;
+//     background-image: none;
+//     border: 1px solid #ccc;
+//     border-radius: 4px;
+//     -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+//     box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+//     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+//     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+//     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+// }

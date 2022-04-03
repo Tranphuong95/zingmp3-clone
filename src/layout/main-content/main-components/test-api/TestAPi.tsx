@@ -2,23 +2,23 @@ import "./index.scss";
 import React from 'react'
 import axios from "axios";
 import api from './../../../../services/api';
+import { BASE_URL } from "./../../../../config/urlConfig";
 
 const TestAPi:React.FC = () => {
-    const BASE_API="http://localhost:8080/";
     const handleGetPublicSongs=async(e:React.MouseEvent)=>{
-        const res=await api.get(BASE_API+"songs");
+        const res=await api.get(BASE_URL+"songs");
         console.log("response", res);
     };
     const handleGetPrivateSongs=async(e:React.MouseEvent)=>{
-        const res=await api.get(BASE_API + "api/private/songs");
+        const res=await api.get(BASE_URL + "api/private/songs");
         console.log("response", res);
     };
     const handleGetVipSongs=async(e:React.MouseEvent)=>{
-        const res=await api.get(BASE_API + "api/vip/songs");
+        const res=await api.get(BASE_URL + "api/vip/songs");
         console.log("response", res);
     };
     const handleGetPostSongs=async(e:React.MouseEvent)=>{
-        const res=await api.post(BASE_API +"api/post/songs")
+        const res=await api.post(BASE_URL +"api/post/songs")
         console.log("response", res);
     }
   return (

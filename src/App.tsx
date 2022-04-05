@@ -43,9 +43,9 @@ function App() {
   const accessToken = TokenService.getLocalAccessToken();
   useEffect(() => {
     document.onmousemove = function () {
-      const token = localStorage.getItem("profile") && JSON.parse(localStorage.getItem("profile") || "");
-      if (token && token.accessToken) {
-        const decodeToken: any = decode(token.accessToken);
+    const accessToken = TokenService.getLocalAccessToken();
+      if (accessToken) {
+        const decodeToken: any = decode(accessToken);
         const exp = decodeToken.exp;
         if (exp * 1000 < new Date().getTime()) {
           // dispatch(logout());

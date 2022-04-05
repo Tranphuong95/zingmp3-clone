@@ -3,6 +3,7 @@ import { filtersObject } from "@/until/filterObject";
 import api from "./api";
 import { AUTH_URL } from "@/config/urlConfig";
 import { LoginType, RegisterType } from "@/features/auth/auth";
+import TokenService from "./token.service";
 
 // type RegisterType = {
 //     userName: string,
@@ -19,7 +20,9 @@ const register = ({ userName, email, phoneNumber, password }: RegisterType) => {
         if(res.data.accessToken){
             const {accessToken, refreshToken}=res.data;
             const user=filtersObject(res.data.user, (key:string)=>key!=="password" && key!=="refreshToken");
-            localStorage.setItem("profile", JSON.stringify({user: user, accessToken, refreshToken}))
+            // localStorage.setItem("profile", JSON.stringify({user: user, accessToken, refreshToken}))
+            TokenService.removeUser();
+            TokenService.setUser({user: user, accessToken, refreshToken})
         }
         return {...res.data, user: filtersObject(res.data.user, (key:string, val: any)=>key!=="password" && key!=="refreshToken")};
     }).catch((err)=> console.log(err))
@@ -31,14 +34,16 @@ const login = ({ email, password, remember }: LoginType) => {
         if (res.data.accessToken) {
             const {accessToken, refreshToken}=res.data;
             const user=filtersObject(res.data.user, (key:string, val: any)=>key!=="password" && key!=="refreshToken");
-            localStorage.setItem("profile", JSON.stringify({user: user, accessToken, refreshToken}))
+            TokenService.removeUser();
+            TokenService.setUser({user: user, accessToken, refreshToken})
+
         }
         return {...res.data, user: filtersObject(res.data.user, (key:string, val: any)=>key!=="password" && key!=="refreshToken")}
     })
     .catch((err)=> console.log(err))
 };
 const logout = () => {
-    localStorage.removeItem("profile")
+    TokenService.removeUser();
 };
 const AuthService = {
     register, login, logout

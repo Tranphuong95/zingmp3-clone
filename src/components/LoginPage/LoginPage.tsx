@@ -39,10 +39,8 @@ const LoginPage: React.FC<{
         setLoading(true)
         try {
             const {email, password}=data; 
-            console.log(data)      
             if(email && password){
-                const resultAction=await dispatch(login(data));
-                console.log("aaaa", resultAction)
+                const resultAction= await dispatch(login(data));
                 if(resultAction && resultAction?.payload?.user?.accessToken === TokenService.getLocalAccessToken()){
                     navigate("/")
                 }
@@ -53,7 +51,6 @@ const LoginPage: React.FC<{
             setLoading(false)
         }
     };
-    console.log(data)
     return (
         <div className={`${styles["authfy-panel"]} ${styles["panel-login"]} text-center ${showForm.login ? "active" : ""}`} id="panel-login">
             <div className={styles["authfy-heading"]} >

@@ -36,10 +36,6 @@ const SignupPage: React.FC<{
             const { userName, email, password, phoneNumber } = data;
             if (!userName || !email || !phoneNumber || typeof phoneNumber !== "number" || !password) return;
             const resultAction: any = await dispatch(register({ userName, email, phoneNumber, password }));
-            console.log("resultAction", resultAction)
-            // if (resultAction && resultAction?.payload?.accessToken) {
-            //     navigate("/")
-            // };
             if(resultAction && resultAction?.payload?.accessToken && resultAction?.payload?.accessToken=== TokenService.getLocalAccessToken()){
                 navigate("/")
             }
@@ -48,7 +44,6 @@ const SignupPage: React.FC<{
             setLoading(false)
         }
     }
-    console.log("signupData", data)
     return (
         <div className={`${styles["authfy-panel"]} ${styles["panel-signup"]} text-center ${showForm?.signup ? "active" : ""}`} id="panel-signup">
             <div className={styles["authfy-heading"]} >

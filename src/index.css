@@ -78,7 +78,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
-
+a{
+  color: inherit;
+}
 div p{
   word-break: break-word;
 }
@@ -94,10 +96,18 @@ div p{
   cursor: pointer;
   position: relative;
 }
+.zm-btn{
+  background-color: transparent;
+  border-radius: 0;
+}
 ul{
   margin: 0;
   padding: 0;
   list-style: none;
+}
+button{
+  /* writing-mode: horizontal-tb !important; */
+  text-indent: 0px;
 }
 button, input, select, textarea, optgroup{
   padding: 0;
@@ -160,7 +170,7 @@ button, optgroup, select{
 /* sidebar css */
 .is-active{
   background-color: var(--alpha-bg);
-  color: var(--text-item-hover);
+  color: var(--text-item-hover) !important;
   border-left: 3px solid var(--purple-primary) !important;
 }
 .is-medium{

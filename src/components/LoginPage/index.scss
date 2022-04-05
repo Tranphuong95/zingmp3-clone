@@ -14,4 +14,9 @@
     opacity: 1;
     -webkit-transform: translateX(0);
     transform: translateX(0);
+};
+@media (max-width: 760px) {   
+    .hidden-xs,.hidden-sm{
+        display: none;
+    }
 }

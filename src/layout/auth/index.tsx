@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactLoading from 'react-loading';
-import { login, register } from "./../../features/auth/auth";
+import { login, register } from "@/features/auth/auth";
 
 interface formLogin {
     email: string,
@@ -32,7 +32,6 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
     const [isSignInForm, setSignInForm] = useState<boolean>(() => true);
     const [loginValues, setLoginValues] = useState<formLogin>(() => initialStateLogin);
     const [registerValues, setRegisterValues] = useState<formRegister>(() => initialStateRegister);
-
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -99,11 +98,11 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
     }
     const handleLogin = async (e: React.MouseEvent) => {
         e.preventDefault();
-        const { email, password } = loginValues;
-        if (!email || !password) return;
         setLoading(true);
         try {
-            const resultAction: any = await dispatch(login({ email, password }));
+            const { email, password } = loginValues;
+            if (!email || !password) return;
+            const resultAction: any = await dispatch(login({ email, password, remember: true }));
             if (resultAction && resultAction?.payload?.user?.accessToken) {
                 onClose(false);
             };
@@ -116,12 +115,12 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
     };
     const handleRegister = async (e:React.FormEvent) => {
         e.preventDefault();
-        const { userName, email, password } = registerValues;
-        const strPhoneNumber = registerValues.phoneNumber;
-        const phoneNumber = Number(strPhoneNumber);
-        if (!userName || !email || !phoneNumber || typeof phoneNumber !== "number" || !password) return;
         setLoading(true);
         try {
+            const { userName, email, password } = registerValues;
+            const strPhoneNumber = registerValues.phoneNumber;
+            const phoneNumber = Number(strPhoneNumber);
+            if (!userName || !email || !phoneNumber || typeof phoneNumber !== "number" || !password) return;
             const resultAction: any = await dispatch(register({ userName, email, phoneNumber, password }));
             console.log(resultAction)
             if (resultAction && resultAction?.payload?.accessToken) {

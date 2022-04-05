@@ -43,9 +43,10 @@ export interface RegisterType{
 };
 export interface LoginType{
     email: string,
-    password: string
+    password: string,
+    remember: boolean
 };
-interface AuthFeatureType{
+export interface AuthFeatureType{
     isLoggedIn: boolean,
     isLoading: boolean,
     user: any
@@ -70,9 +71,9 @@ export const register=createAsyncThunk(
 );
 export const login=createAsyncThunk(
     "auth/login",
-    async({email, password}:LoginType, thunkAPI)=>{
+    async({email, password, remember}:LoginType, thunkAPI)=>{
         try {
-            const data=await AuthService.login({email, password});
+            const data=await AuthService.login({email, password, remember});
             thunkAPI.dispatch(setMessage(data?.message));
             return {
                 user: data

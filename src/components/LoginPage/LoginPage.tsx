@@ -4,15 +4,21 @@ import styles from "./login-page.module.scss";
 import { LoginFormDataType, showFormType } from ".";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { login } from "@/features/auth/auth";
+import { useNavigate } from "react-router-dom";
+import TokenService from "@/services/token.service";
 
 const LoginPage: React.FC<{
     showForm: showFormType,
     data: LoginFormDataType,
     setShowForm: React.Dispatch<React.SetStateAction<showFormType>>,
     setLoginFormData: React.Dispatch<React.SetStateAction<LoginFormDataType>>
-
-}> = ({ showForm, setShowForm, data, setLoginFormData }) => {
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
+}> = ({ showForm, setShowForm, data, setLoginFormData, setLoading }) => {
     const [showPassword, setShowPassword] = useState<boolean>(() => false);
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
     const handleChangeShowPassword = (val: boolean) => {
         setShowPassword(val)
     };
@@ -28,8 +34,24 @@ const LoginPage: React.FC<{
         const typeInput = e.target.type;
         setLoginFormData((data)=>({ ...data, [e.target.name]: typeInput === "checkbox" ? e.target.checked : e.target.value }))
     }
-    const onLogin = (e: React.FormEvent) => {
-
+    const onLogin = async(e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true)
+        try {
+            const {email, password}=data; 
+            console.log(data)      
+            if(email && password){
+                const resultAction=await dispatch(login(data));
+                console.log("aaaa", resultAction)
+                if(resultAction && resultAction?.payload?.user?.accessToken === TokenService.getLocalAccessToken()){
+                    navigate("/")
+                }
+            }
+            setLoading(false)
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
+        }
     };
     console.log(data)
     return (

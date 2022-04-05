@@ -1,17 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../../styles/layout/header.module.scss';
+import { useNavigate } from 'react-router-dom';
+import styles from '@/styles/layout/header.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeftLong, faArrowRightLong, faSearch, faShirt, faGem, faArrowUpFromBracket, faGear, faArrowTrendUp } from '@fortawesome/free-solid-svg-icons'
-import ToolTip from '../../until-component/tooltip';
+import { faArrowLeftLong, faArrowRightLong, faSearch, faShirt, faGem, faArrowUpFromBracket, faGear, faArrowTrendUp, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import ToolTip from '@/until-component/tooltip';
 import Auth from '../auth';
-
+import TokenService from '@/services/token.service';
+import { Button } from '@/until-component/component';
+export const UserDialog:React.FC<{open: boolean, iconStyle: any}> = ({ open, iconStyle }) => {
+    const navigate=useNavigate()
+    if (!open) return (null);
+    const onLogout=()=>{
+        TokenService.removeUser();
+        const accessToken=TokenService.getLocalAccessToken()
+        if(!accessToken) navigate("/login")
+    }
+    return (
+        <div className={styles["menu-setting"]}>
+            <ul className={styles["menu-list"]}>
+                <li className={styles["header-player-setting"]}>
+                    <a href="/vip" target="_blank">
+                        <Button className="zm-btn btn">
+                            <FontAwesomeIcon icon={faGem} style={iconStyle} />
+                            <span>Nâng cấp VIP</span>
+                        </Button>
+                    </a>
+                </li>
+                <li className={styles["header-player-setting"]}>
+                    <a href="vip" target="_blank">
+                        <Button className="zm-btn btn">
+                            <FontAwesomeIcon icon={faGem} style={iconStyle} />
+                            <span>Mua code VIP</span>
+                        </Button>
+                    </a>
+                </li>
+                <li className={`${styles["header-player-setting"]} ${styles["logout-header"]}`}>
+                    <a>
+                        <Button className="zm-btn btn" onClick={onLogout}>
+                            <FontAwesomeIcon  icon={faArrowRightFromBracket} style={iconStyle}/>
+                            <span>Đăng xuất</span>
+                        </Button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    )
+}
 const Header: React.FC = () => {
-    const isLogin: boolean = false;
+    const isLogin: boolean = TokenService.getLocalAccessToken() ? true : false;
 
-    const STYLE_RIGHT_HEADER_ICON = { fontSize: 16, color: "white" };
+    const STYLE_RIGHT_HEADER_ICON = { fontSize: 20, color: "var(--navigation-text)" };
     const SUGGEST_LIST_ICON = { fontSize: 12, marginRight: 10, color: "var(--text-secondary)" };
-    const [isFocus, setFocus] = useState(() => false);
-    const [open, setOpen]=useState(()=>false);
+    const [isFocus, setFocus] = useState<boolean>(() => false);
+    const [open, setOpen] = useState<boolean>(() => false);
+    const [openDialog, setOpenDialog] = useState<boolean>(() => false)
     useEffect(() => {
         const formSearch = document.querySelector<HTMLElement>("#form-search");
         const documentClick = (e: MouseEvent) => {
@@ -24,12 +66,15 @@ const Header: React.FC = () => {
     const handleFocus = () => {
         setFocus(true)
     }
-    const handleOpenAuthForm=()=>{
+    const handleOpenAuthForm = () => {
         setOpen(true)
         // window.open('https://id.zalo.me/account?continue=https%3A%2F%2Fzingmp3.vn%2F%3FisZaloPopupLogin%3D1','_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes')
     };
-    const handleCloseAuthForm=(value:boolean)=>{
+    const handleCloseAuthForm = (value: boolean) => {
         setOpen(value)
+    };
+    const openUserDialog = () => {
+        setOpenDialog((open) => !open)
     }
     return (
         <header className={styles.header}>
@@ -130,16 +175,18 @@ const Header: React.FC = () => {
                             </button>
                         </ToolTip>
                     </div>
+
                     {isLogin ? (
-                        <a href='/mymusic'>
+                        <div className={styles["avatar"]}>
                             <div className={styles["avatar-frame"]}>
-                                <button className={`btn`} tabIndex={0}>
+                                <button className={`btn`} tabIndex={0} onClick={openUserDialog}>
                                     <figure className={`${styles.image} is-38x38 is-rounded`}>
                                         <img src="https://s120-ava-talk.zadn.vn/9/0/2/8/0/120/841e540ce5fb31cbee4fcf9d4092bad5.jpg" alt="" />
                                     </figure>
                                 </button>
                             </div>
-                        </a>
+                            <UserDialog open={openDialog} iconStyle={STYLE_RIGHT_HEADER_ICON} />
+                        </div>
                     ) : (
                         <div className={styles['login-container']}>
                             <button className={`btn`} tabIndex={0} onClick={handleOpenAuthForm}>
@@ -153,7 +200,7 @@ const Header: React.FC = () => {
 
                 </div>
             </div>
-            <Auth open={open} onClose={handleCloseAuthForm}/>
+            <Auth open={open} onClose={handleCloseAuthForm} />
         </header>
     )
 }

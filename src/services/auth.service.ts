@@ -1,15 +1,16 @@
 // import axios from "axios";
-import { filtersObject } from "./../until/filterObject";
+import { filtersObject } from "@/until/filterObject";
 import api from "./api";
-import { AUTH_URL } from "./../config/urlConfig";
+import { AUTH_URL } from "@/config/urlConfig";
+import { LoginType, RegisterType } from "@/features/auth/auth";
 
-type RegisterType = {
-    userName: string,
-    email: string,
-    phoneNumber: number,
-    password: string,
-}
-type LoginType = { email: string, password: string }
+// type RegisterType = {
+//     userName: string,
+//     email: string,
+//     phoneNumber: number,
+//     password: string,
+// }
+// type LoginType = { email: string, password: string, remember: boolean}
 const register = ({ userName, email, phoneNumber, password }: RegisterType) => {
     console.log(api)
     return api.post(AUTH_URL + "signup", {
@@ -23,9 +24,9 @@ const register = ({ userName, email, phoneNumber, password }: RegisterType) => {
         return {...res.data, user: filtersObject(res.data.user, (key:string, val: any)=>key!=="password" && key!=="refreshToken")};
     }).catch((err)=> console.log(err))
 };
-const login = ({ email, password }: LoginType) => {
+const login = ({ email, password, remember }: LoginType) => {
     return api.post(AUTH_URL + "signin", {
-        email, password
+        email, password, remember
     }).then(res => {
         if (res.data.accessToken) {
             const {accessToken, refreshToken}=res.data;

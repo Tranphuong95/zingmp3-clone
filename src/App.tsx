@@ -14,6 +14,7 @@ import { AUTH_URL } from './config/urlConfig';
 import TokenService from './services/token.service';
 import { PrivateLogin, PrivateRoute } from './until-component/PrivateRoute';
 import LoginPage from './components/LoginPage';
+import { useAppSelector } from './app/hooks';
 
 type profileType = {
   id: string,
@@ -43,6 +44,7 @@ function App() {
   }
   const [profile, setProfile] = useState<profileType>(() => initialStateProfile);
   const accessToken = TokenService.getLocalAccessToken();
+  useAppSelector((state)=>console.log('state', state))
   useEffect(() => {
     if (accessToken) {
       getProfile();

@@ -88,14 +88,18 @@ export const login=createAsyncThunk(
 // export const logout=createAsyncThunk("auth/logout",async () => {
 //     await AuthService.logout();
 // });
-export const logout=createAsyncThunk("auth/logout",() => {
-    AuthService.logout();
-});
+// export const logout=createAsyncThunk("auth/logout",async(thunkAPI) => {
+//     AuthService.logout();
+// });
 const initialState:AuthFeatureType=user?{isLoggedIn: true, user, isLoading: false}:{isLoggedIn:false, isLoading: false, user: null};
 const authSlice=createSlice({
     name: "auth",
     initialState,
-    reducers:{},
+    reducers:{
+        logout: ()=>{
+            AuthService.logout();
+        }
+    },
     extraReducers: (builder)=>{
         builder.addCase(register.pending, (state, action)=>{
             state.isLoggedIn = false;
@@ -118,20 +122,9 @@ const authSlice=createSlice({
             state.isLoggedIn = false;
             state.user=null;
             // state.isLoading=false;
-        }).addCase(logout.pending, (state, action)=>{
-            state.isLoggedIn = false;
-            state.user=null;
-            // state.isLoading=true;
-        }).addCase(logout.fulfilled, (state, action)=>{
-            state.isLoggedIn = false;
-            state.user=null;
-            // state.isLoading=false;
-        }).addCase(logout.rejected, (state, action)=>{
-            state.isLoggedIn = false;
-            state.user=null;
-            // state.isLoading=false;
         })
     }
 });
-const { reducer } = authSlice;
+const { reducer, actions} = authSlice;
+export const {logout}=actions
 export default reducer;

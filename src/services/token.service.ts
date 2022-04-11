@@ -17,6 +17,10 @@ const removeUser = () => {
   localStorage.removeItem("profile");
   sessionStorage.removeItem("profile")
 };
+const clearAll=()=>{
+  localStorage.clear();
+  sessionStorage.clear();
+}
 const getLocalRefreshToken = () => {
   const profile=getUser();
   return profile?.refreshToken;
@@ -41,5 +45,6 @@ const TokenService = {
   getUser,
   setUser,
   removeUser,
+  clearAll
 };
 export default TokenService;

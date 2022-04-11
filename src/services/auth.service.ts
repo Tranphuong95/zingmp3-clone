@@ -47,7 +47,8 @@ const login = ({ email, password, remember }: LoginType) => {
     .catch((err)=> {console.log(err); toast.error(err.response.data.message);return {message: err.response.data.message}})
 };
 const logout = () => {
-    TokenService.removeUser();
+    // TokenService.removeUser();
+    TokenService.clearAll();
 };
 const AuthService = {
     register, login, logout

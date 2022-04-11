@@ -40,7 +40,7 @@ const LoginPage: React.FC<{
         try {
             const {email, password}=data; 
             if(email && password){
-                const resultAction= await dispatch(login(data));
+                const resultAction:any= await dispatch(login(data));
                 if(resultAction && resultAction?.payload?.user?.accessToken === TokenService.getLocalAccessToken()){
                     navigate("/")
                 }
@@ -82,11 +82,11 @@ const LoginPage: React.FC<{
                             </label>
                         </div>
                         <div>
-                            <button type="submit" className={`${styles["btn-forgot__password"]} btn`} onClick={goForgotPage}>Quên mật khẩu?</button>
+                            <button className={`${styles["btn-forgot__password"]} btn`} onClick={goForgotPage}>Quên mật khẩu?</button>
                         </div>
                     </div>
                     <div className={styles["form-group"]}>
-                        <button className={`${styles["btn-signin"]} btn`}>Đăng nhập</button>
+                        <button type="submit" className={`${styles["btn-signin"]} btn`}>Đăng nhập</button>
                     </div>
                 </form>
             </div>

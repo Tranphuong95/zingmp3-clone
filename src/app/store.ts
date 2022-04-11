@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import authReducer from '../features/auth/auth';
-import messageReducer from "../features/auth/auth";
+import messageReducer from "../features/auth/message";
 export const store=configureStore({
     reducer: {
        auth: authReducer,

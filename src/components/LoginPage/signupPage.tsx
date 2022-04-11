@@ -5,9 +5,9 @@ import styles from "./login-page.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { showFormType, SignupFormDataType } from ".";
-import { register } from "./../../features/auth/auth";
+import { register } from "../../features/auth/auth";
 import { useNavigate } from "react-router-dom";
-import TokenService from "./../../services/token.service";
+import TokenService from "../../services/token.service";
 const SignupPage: React.FC<{
     showForm: showFormType,
     data: SignupFormDataType,

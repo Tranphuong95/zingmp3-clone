@@ -7,11 +7,15 @@ import ToolTip from '@/until-component/tooltip';
 import Auth from '../auth';
 import TokenService from '@/services/token.service';
 import { Button } from '@/until-component/component';
+import { useAppDispatch } from '@/app/hooks';
+import { logout } from '@/features/auth/auth';
 export const UserDialog:React.FC<{open: boolean, iconStyle: any}> = ({ open, iconStyle }) => {
-    const navigate=useNavigate()
+    const navigate=useNavigate();
+    const dispatch=useAppDispatch();
     if (!open) return (null);
     const onLogout=()=>{
-        TokenService.removeUser();
+        // TokenService.removeUser();
+        dispatch(logout());
         const accessToken=TokenService.getLocalAccessToken()
         if(!accessToken) navigate("/login")
     }

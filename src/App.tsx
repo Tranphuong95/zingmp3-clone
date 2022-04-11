@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import styles from "./styles/layout.module.scss";
 import SideBar from './layout/side-bar';
 import Header from './layout/header';
 import MainContent from './layout/main-content';
 import PlayBar from './layout/play-bar';
-import decode from 'jwt-decode';
 import AdminPage from './components/admin-page/AdminPage';
 import api from "./services/api";
 import { AUTH_URL } from './config/urlConfig';
@@ -42,19 +44,6 @@ function App() {
   const [profile, setProfile] = useState<profileType>(() => initialStateProfile);
   const accessToken = TokenService.getLocalAccessToken();
   useEffect(() => {
-    document.onmousemove = function () {
-    const accessToken = TokenService.getLocalAccessToken();
-      if (accessToken) {
-        const decodeToken: any = decode(accessToken);
-        const exp = decodeToken.exp;
-        if (exp * 1000 < new Date().getTime()) {
-          // dispatch(logout());
-        };
-      }
-    }
-  });
-
-  useEffect(() => {
     if (accessToken) {
       getProfile();
     }
@@ -66,6 +55,7 @@ function App() {
     }
     // setProfile(resultProfile);
   };
+
   return (
     <>
       {/* <div className={`${styles.section} layout`}>
@@ -74,9 +64,12 @@ function App() {
         <MainContent />
         <PlayBar />
       </div> */}
+      <ToastContainer
+        autoClose={2000}
+      />
       <Routes>
-          <Route path="/*" element={<PrivateRoute><PublishPage /></PrivateRoute>} />
-          <Route path='/login' element={<PrivateLogin><LoginPage/></PrivateLogin>}/>
+        <Route path="/*" element={<PrivateRoute><PublishPage /></PrivateRoute>} />
+        <Route path='/login' element={<PrivateLogin><LoginPage /></PrivateLogin>} />
         {profile.roles === "admin" && <Route path="/admin" element={<AdminPage profile={profile} />} />}
       </Routes>
     </>

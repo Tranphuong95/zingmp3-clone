@@ -51,13 +51,11 @@ export interface AuthFeatureType{
     isLoading: boolean,
     user: any
 }
-
 export const register=createAsyncThunk(
     "auth/register",
     async({userName, email, phoneNumber, password}:RegisterType, thunkAPI)=>{
         try {
             const data=await AuthService.register({userName, email, phoneNumber, password});
-            console.log(data)
             thunkAPI.dispatch(setMessage(data?.message));
             return data;
         } catch (error) {
@@ -91,10 +89,9 @@ export const login=createAsyncThunk(
 //     await AuthService.logout();
 // });
 export const logout=createAsyncThunk("auth/logout",() => {
-    console.log("11111")
     AuthService.logout();
 });
-const initialState:AuthFeatureType=user?{isLoggedIn: true, user, isLoading: false}:{isLoggedIn:false, isLoading: false, user: {}};
+const initialState:AuthFeatureType=user?{isLoggedIn: true, user, isLoading: false}:{isLoggedIn:false, isLoading: false, user: null};
 const authSlice=createSlice({
     name: "auth",
     initialState,

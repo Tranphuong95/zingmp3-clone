@@ -8,8 +8,8 @@ import { faFacebookF, faTwitter, faGooglePlusG } from '@fortawesome/free-brands-
 import ReactLoading from 'react-loading';
 
 import LoginPage from "./LoginPage";
-import SignupPage from "./signupPage";
-import ForgotPage from "./forgotPage";
+import SignupPage from "./SignupPage";
+import ForgotPage from "./ForgotPage";
 
 export type showFormType = {
   login: boolean,
@@ -50,10 +50,10 @@ export const initialForgotFormData: forgotFormType = {
   email: ""
 }
 const Auth = () => {
-  const [showForm, setShowForm] = useState<showFormType>(() => initialShowForm);
-  const [loginFormData, setLoginFormData] = useState<LoginFormDataType>(() => initialLoginFormData);
-  const [signupFormData, setSignupFormData] = useState<SignupFormDataType>(() => initialSignupFormData);
-  const [forgotFormData, setForgotFormData] = useState<forgotFormType>(() => initialForgotFormData);
+  const [showForm, setShowForm] = useState<showFormType>(()=>initialShowForm);
+  const [loginFormData, setLoginFormData] = useState<LoginFormDataType>(()=>initialLoginFormData);
+  const [signupFormData, setSignupFormData] = useState<SignupFormDataType>(()=>initialSignupFormData);
+  const [forgotFormData, setForgotFormData] = useState<forgotFormType>(()=>initialForgotFormData);
   const [loading, setLoading] = useState<boolean>(() => false);
   useEffect(() => {
     if (showForm.login) {
@@ -68,8 +68,13 @@ const Auth = () => {
       setLoginFormData(initialLoginFormData);
       setSignupFormData(initialSignupFormData)
     }
+    return ()=>{
+      setSignupFormData(initialSignupFormData);
+      setLoginFormData(initialLoginFormData);
+      setForgotFormData(initialForgotFormData)
+    }
   }, [showForm])
-
+  console.log("showForm", showForm, loginFormData);
   return (
     <div className={styles['container']}>
       <div className={styles["authfy-container"]}>
@@ -102,7 +107,7 @@ const Auth = () => {
         <div className={styles['authfy-panel__right']}>
           <div className={styles["authfy-login"]}>
             {/* panel login start */}
-            <LoginPage showForm={showForm} setShowForm={setShowForm} data={loginFormData} setLoginFormData={setLoginFormData} setLoading={setLoading}/>
+            <LoginPage showForm={showForm} setShowForm={setShowForm} data={loginFormData} setLoginFormData={setLoginFormData} setLoading={setLoading} />
             {/* panel signup start */}
             <SignupPage showForm={showForm} setShowForm={setShowForm} data={signupFormData} setSignupFormData={setSignupFormData} setLoading={setLoading} />
             {/* panel forgot start */}

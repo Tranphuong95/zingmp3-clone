@@ -30,16 +30,16 @@ const LoginPage: React.FC<{
     const handleChangeShowPassword = (val: boolean) => {
         setShowPassword(val)
     };
-    const handleError=(name: string, value:any, roles:any)=>{
+    const handleError=(key: string, value:any, roles:any)=>{
         let result=true;
-        if(name==="remember") return;
-        else if(name==="email"){
+        if(key==="remember") return;
+        else if(key==="email"){
             result=!EmailValidate.validate(value);
         }
         else{
-            result=!roles[name].test(value);
+            result=!roles[key].test(value);
         }
-        setLoginError(state=>({...state, [name]: result}))
+        setLoginError(state=>({...state, [key]: result}))
     }
     const goSignupPage = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -54,9 +54,9 @@ const LoginPage: React.FC<{
         handleError(e.target.name, e.target.value, roles)
         setLoginFormData((data)=>({ ...data, [e.target.name]: typeInput === "checkbox" ? e.target.checked : e.target.value }))
     };
-    const handleFocus=(name: keyof LoginFocusType)=>{
-        if(!focus[name]){
-            setLoginFocus((state)=>({...state, [name]: true}))
+    const handleFocus=(key: keyof LoginFocusType)=>{
+        if(!focus[key]){
+            setLoginFocus((state)=>({...state, [key]: true}))
         }
     }
     const onLogin = async(e: React.FormEvent) => {

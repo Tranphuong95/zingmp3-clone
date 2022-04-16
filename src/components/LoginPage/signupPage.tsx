@@ -30,15 +30,15 @@ const SignupPage: React.FC<{
     const handleChangeShowPassword = (val: boolean) => {
         setShowPassword(val)
     };
-    const handleError=(name: string, value:any, roles:any)=>{
+    const handleError=(key: string, value:any, roles:any)=>{
         let result=true;
-        if(name==="email"){
+        if(key==="email"){
             result=!EmailValidate.validate(value);
         }
         else{
-            result=!roles[name].test(value);
+            result=!roles[key].test(value);
         }
-        setSignUpError(state=>({...state, [name]: result}))
+        setSignUpError(state=>({...state, [key]: result}))
     }
     const goLoginPage = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -48,9 +48,9 @@ const SignupPage: React.FC<{
         handleError(e.target.name, e.target.value?.trim(), SignUpErrorRoles);
         setSignupFormData((data)=>({...data, [e.target.name]: e.target.name==="phoneNumber"? e.target.value? Number(e.target.value): e.target.value: e.target.value}))
     };
-    const handleFocus=(name: keyof SignUpFocusType)=>{
-        if(!focus[name]){
-            setSignUpFocus((state)=>({...state, [name]: true}))
+    const handleFocus=(key: keyof SignUpFocusType)=>{
+        if(!focus[key]){
+            setSignUpFocus((state)=>({...state, [key]: true}))
         }
     }
     const onSignup=async(e:React.FormEvent)=>{

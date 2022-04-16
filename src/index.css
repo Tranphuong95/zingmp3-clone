@@ -1,34 +1,38 @@
-*, *::after, *::before{
+*,
+*::after,
+*::before {
   box-sizing: border-box;
   text-decoration: none;
 }
-:root{
-  --bg-sidebar: hsla(0,0%,100%,0.05);
-  --alpha-bg: hsla(0,0%,100%,0.1);
+
+:root {
+  --bg-sidebar: hsla(0, 0%, 100%, 0.05);
+  --alpha-bg: hsla(0, 0%, 100%, 0.1);
   --layout-bg: #542c75;
   --alpha-layout-bg: rgb(93 54 124);
-  --loading-bg: hsla(0,0%,100%,0.1);
+  --loading-bg: hsla(0, 0%, 100%, 0.1);
   --navigation-text: #dadada;
   --primary-bg: #6a39af;
   --purple-primary: #ed2b91;
   --text-placeholder: #dadada;
   --text-primary: #fff;
-  --text-secondary: hsla(0,0%,100%,0.5);
+  --text-secondary: hsla(0, 0%, 100%, 0.5);
   --text-item-hover: #fff;
   --white: #fff;
   --black: #32323d;
   --search-text: #eee;
-  --border-primary: hsla(0,0%,100%,0.1);
-  --dark-alpha-50: rgba(0,0,0,0.5);
+  --border-primary: hsla(0, 0%, 100%, 0.1);
+  --dark-alpha-50: rgba(0, 0, 0, 0.5);
   --padding-section: 59px;
-  --hover-tooltip-opacity: hsla(0,0%,100%,0.3);
+  --hover-tooltip-opacity: hsla(0, 0%, 100%, 0.3);
 
   /* --border-primary: rgba(0,0,0,0.1); */
 
-  --scroll-thumb-bg: hsla(0,0%,100%,0.3);
+  --scroll-thumb-bg: hsla(0, 0%, 100%, 0.3);
 
   --img-logo-mp3: url(https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/backgrounds/logo-dark.svg);
 }
+
 body {
   /* margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -49,24 +53,30 @@ body {
   overscroll-behavior: none;
   overflow: hidden;
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
   width: 6px;
 }
-::-webkit-scrollbar-thumb{
+
+::-webkit-scrollbar-thumb {
   border-radius: 4px;
   -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 50%);
 }
+
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset #fff;
   border-radius: 4px;
 }
-:focus{
+
+:focus {
   outline: none;
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 /* Hide Arrows From Input Number */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -78,13 +88,21 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
-a{
+
+/* Hide button show password in Edge */
+::-ms-reveal {
+  display: none;
+}
+
+a {
   color: inherit;
 }
-div p{
+
+div p {
   word-break: break-word;
 }
-.btn{
+
+.btn {
   font-size: 14px;
   border-radius: 999px;
   line-height: normal;
@@ -96,20 +114,28 @@ div p{
   cursor: pointer;
   position: relative;
 }
-.zm-btn{
+
+.zm-btn {
   background-color: transparent;
   border-radius: 0;
 }
-ul{
+
+ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-button{
+
+button {
   /* writing-mode: horizontal-tb !important; */
   text-indent: 0px;
 }
-button, input, select, textarea, optgroup{
+
+button,
+input,
+select,
+textarea,
+optgroup {
   padding: 0;
   border: none;
   font: inherit;
@@ -117,49 +143,62 @@ button, input, select, textarea, optgroup{
   background-color: transparent;
   word-break: normal;
 }
-button, optgroup, select{
+
+button,
+optgroup,
+select {
   user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+
 /* loading */
-.loading{
+.loading {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   z-index: 999;
 }
+
 /* header css */
-.is-38x38{
+.is-38x38 {
   width: 38px;
   height: 38px;
 }
-.is-rounded{
+
+.is-rounded {
   border: 0;
   border-radius: 50%;
 }
+
 /* icon play */
-.icon.ic-svg-play-circle{
+.icon.ic-svg-play-circle {
   background-image: url("https://zjs.zadn.vn/zmp3-desktop/releases/v1.6.2/static/media/play.81e7696e.svg");
 }
+
 /* icon running music */
-.ic-gif-playing-white{
+.ic-gif-playing-white {
   background-image: url("https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/icons/icon-playing.gif");
 }
-.icon.ic-gif-playing, .icon.ic-gif-playing-auto, .icon.ic-gif-playing-white {
+
+.icon.ic-gif-playing,
+.icon.ic-gif-playing-auto,
+.icon.ic-gif-playing-white {
   width: 18px;
   height: 18px;
   background-size: 18px;
   background-repeat: no-repeat;
   background-position: 50%;
 }
+
 /* css Link router */
-.link-router{
+.link-router {
   color: var(--white);
 }
+
 /* layout css */
-.layout{
+.layout {
   display: flex;
   width: 100%;
   min-width: 768px;
@@ -168,16 +207,18 @@ button, optgroup, select{
 }
 
 /* sidebar css */
-.is-active{
+.is-active {
   background-color: var(--alpha-bg);
   color: var(--text-item-hover) !important;
   border-left: 3px solid var(--purple-primary) !important;
 }
-.is-medium{
+
+.is-medium {
   font-size: 14px;
   padding: 9px 24px;
 }
-.is-outline{
+
+.is-outline {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,36 +228,44 @@ button, optgroup, select{
   color: var(--text-primary);
   margin: 0 auto;
 }
-.is-upper{
+
+.is-upper {
   text-transform: uppercase;
 }
-.is-hidden{
+
+.is-hidden {
   display: none;
 }
-.pt-15{
-  padding-top: 15px!important;
+
+.pt-15 {
+  padding-top: 15px !important;
 }
+
 /* main-page css */
-.container{  
+.container {
   position: relative;
   flex-grow: 1;
   width: 100%;
   margin: 0 auto
 }
-h1.title, h3.title{
+
+h1.title,
+h3.title {
   font-size: 18px;
   color: var(--text-primary);
   margin-bottom: 10px;
 }
+
 /* .is-48x48{
   width: 48px;
   height: 48px;
 } */
-.card{
+.card {
   width: 100%;
   position: relative;
 }
-.opacity{
+
+.opacity {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -225,34 +274,38 @@ h1.title, h3.title{
   background-color: var(--dark-alpha-50);
   visibility: hidden;
 }
-.icon{
+
+.icon {
   line-height: 66%;
   display: inline-block;
 }
-.actions{
+
+.actions {
   position: absolute;
-    left: 50%;
-    top: 50%;
-    bottom: auto;
-    right: auto;
-    z-index: 98;
-    transform: translateX(-50%) translateY(-50%);
-    display: -moz-flex;
-    display: flex;
-    -moz-justify-content: space-around;
-    -ms-justify-content: space-around;
-    -o-justify-content: space-around;
-    justify-content: space-around;
-    -ms-flex-pack: distribute;
-    -moz-align-items: center;
-    -ms-align-items: center;
-    -o-align-items: center;
-    align-items: center;
-    -ms-flex-align: center;
-    visibility: hidden;
-    width: 80%;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  z-index: 98;
+  transform: translateX(-50%) translateY(-50%);
+  display: -moz-flex;
+  display: flex;
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  -o-justify-content: space-around;
+  justify-content: space-around;
+  -ms-flex-pack: distribute;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -ms-flex-align: center;
+  visibility: hidden;
+  width: 80%;
 }
-.btn.active:hover, .btn:hover{
+
+.btn.active:hover,
+.btn:hover {
   -webkit-filter: brightness(.9);
   filter: brightness(.9);
 }

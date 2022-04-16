@@ -1,20 +1,28 @@
 import "./index.scss";
+import styles from "./login-page.module.scss";
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
-import styles from "./login-page.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { showFormType, SignupFormDataType } from ".";
+import * as EmailValidate from "email-validator";
+import { toast } from "react-toastify";
+import { showFormType, SignUpErrorType, SignUpFocusType, SignupFormDataType } from ".";
 import { register } from "../../features/auth/auth";
 import { useNavigate } from "react-router-dom";
 import TokenService from "../../services/token.service";
+import { SignUpErrorRoles } from "@/helper/roleError";
+
 const SignupPage: React.FC<{
     showForm: showFormType,
     data: SignupFormDataType,
+    errors: SignUpErrorType,
+    focus: SignUpFocusType,
     setShowForm: React.Dispatch<React.SetStateAction<showFormType>>,
     setSignupFormData: React.Dispatch<React.SetStateAction<SignupFormDataType>>,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-}> = ({ showForm, setShowForm, data, setSignupFormData, setLoading }) => {
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+    setSignUpError: React.Dispatch<React.SetStateAction<SignUpErrorType>>
+    setSignUpFocus: React.Dispatch<React.SetStateAction<SignUpFocusType>>
+}> = ({ showForm, setShowForm, data, setSignupFormData, setLoading, errors, setSignUpError, focus, setSignUpFocus }) => {
 
     const [showPassword, setShowPassword] = useState<boolean>(() => false);
     const dispatch=useDispatch();
@@ -22,18 +30,40 @@ const SignupPage: React.FC<{
     const handleChangeShowPassword = (val: boolean) => {
         setShowPassword(val)
     };
+    const handleError=(name: string, value:any, roles:any)=>{
+        let result=true;
+        if(name==="email"){
+            result=!EmailValidate.validate(value);
+        }
+        else{
+            result=!roles[name].test(value);
+        }
+        setSignUpError(state=>({...state, [name]: result}))
+    }
     const goLoginPage = (e: React.MouseEvent) => {
         e.preventDefault();
         setShowForm({ login: true, signup: false, forgot: false })
     };
     const onHandleChangeInput=(e:React.ChangeEvent<HTMLInputElement>)=>{
+        handleError(e.target.name, e.target.value?.trim(), SignUpErrorRoles);
         setSignupFormData((data)=>({...data, [e.target.name]: e.target.name==="phoneNumber"? e.target.value? Number(e.target.value): e.target.value: e.target.value}))
     };
+    const handleFocus=(name: keyof SignUpFocusType)=>{
+        if(!focus[name]){
+            setSignUpFocus((state)=>({...state, [name]: true}))
+        }
+    }
     const onSignup=async(e:React.FormEvent)=>{
         e.preventDefault();
+        const { userName, email, password, phoneNumber } = data;
+        if(Object.values(errors).some(f=>f===true)) return ;
         setLoading(true);
         try {
-            const { userName, email, password, phoneNumber } = data;
+            const isValidateEmail=EmailValidate.validate(email);
+            if(!isValidateEmail) {
+                setLoading(false);
+                return toast.error("email cua ban khong dung dinh dang")
+            }
             if (!userName || !email || !phoneNumber || typeof phoneNumber !== "number" || !password) return;
             const resultAction: any = await dispatch(register({ userName, email, phoneNumber, password }));
             if(resultAction && resultAction?.payload?.accessToken && resultAction?.payload?.accessToken=== TokenService.getLocalAccessToken()){
@@ -57,7 +87,11 @@ const SignupPage: React.FC<{
                          className={styles["form-control"]} 
                          placeholder='Tên người dùng'
                          onChange={onHandleChangeInput}
+                         onFocus={()=>handleFocus("userName")}
                          />
+                         {errors.userName && focus.userName && <div className="error-input">
+                            <span>Email không đúng định dạng</span>
+                        </div>}
                     </div>
                     <div className={styles["form-group"]}>
                         <input type="email" 
@@ -66,7 +100,11 @@ const SignupPage: React.FC<{
                         className={styles["form-control"]} 
                         placeholder='Địa chỉ email' 
                         onChange={onHandleChangeInput}
+                        onFocus={()=>handleFocus("email")}
                         />
+                        {errors.email && focus.email && <div className="error-input">
+                            <span>Email không đúng định dạng</span>
+                        </div>}
                     </div>
                     <div className={styles["form-group"]}>
                         <input type="number" 
@@ -75,7 +113,11 @@ const SignupPage: React.FC<{
                         className={styles["form-control"]} 
                         placeholder='Số điện thoại' 
                         onChange={onHandleChangeInput}
+                        onFocus={()=>handleFocus("phoneNumber")}
                         />
+                        {errors.phoneNumber && focus.phoneNumber && <div className="error-input">
+                            <span>Email không đúng định dạng</span>
+                        </div>}
                     </div>
                     <div className={styles["form-group"]}>
                         <div className={styles["pwdMask"]}>
@@ -83,12 +125,16 @@ const SignupPage: React.FC<{
                             value={data.password}
                             name="password" 
                             className={styles["form-control"]}
-                             placeholder='Nhập mật khẩu' 
-                         onChange={onHandleChangeInput}
+                            placeholder='Nhập mật khẩu' 
+                            onChange={onHandleChangeInput}
+                            onFocus={()=>handleFocus("password")}
                              />
                             {!showPassword ? <FontAwesomeIcon icon={faEyeSlash} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(true)} />
                                 : <FontAwesomeIcon icon={faEye} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(false)} />}
                         </div>
+                        {errors.password && focus.password && <div className="error-input">
+                            <span>Email không đúng định dạng</span>
+                        </div>}
                     </div>
                     <div className={styles["form-group"]}>
                         <button type="submit" className={`${styles["btn-signin"]} btn`}>Đăng ký</button>

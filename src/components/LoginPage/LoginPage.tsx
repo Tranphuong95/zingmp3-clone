@@ -1,27 +1,46 @@
 import "./index.scss";
 import React, { useState } from 'react'
 import styles from "./login-page.module.scss";
-import { LoginFormDataType, showFormType } from ".";
+import { LoginErrorType, LoginFocusType, LoginFormDataType, showFormType } from ".";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
+import * as EmailValidate from "email-validator"
 import { login } from "@/features/auth/auth";
 import { useNavigate } from "react-router-dom";
 import TokenService from "@/services/token.service";
 
+import { LoginErrorRoles as roles} from "@/helper/roleError";
+
 const LoginPage: React.FC<{
     showForm: showFormType,
     data: LoginFormDataType,
+    errors: LoginErrorType,
+    focus: LoginFocusType,
     setShowForm: React.Dispatch<React.SetStateAction<showFormType>>,
     setLoginFormData: React.Dispatch<React.SetStateAction<LoginFormDataType>>
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
-}> = ({ showForm, setShowForm, data, setLoginFormData, setLoading }) => {
+    setLoginError: React.Dispatch<React.SetStateAction<LoginErrorType>>
+    setLoginFocus: React.Dispatch<React.SetStateAction<LoginFocusType>>
+}> = ({ showForm, setShowForm, data, setLoginFormData, setLoading, errors, setLoginError, focus, setLoginFocus }) => {
     const [showPassword, setShowPassword] = useState<boolean>(() => false);
     const dispatch=useDispatch();
     const navigate=useNavigate();
+    
     const handleChangeShowPassword = (val: boolean) => {
         setShowPassword(val)
     };
+    const handleError=(name: string, value:any, roles:any)=>{
+        let result=true;
+        if(name==="remember") return;
+        else if(name==="email"){
+            result=!EmailValidate.validate(value);
+        }
+        else{
+            result=!roles[name].test(value);
+        }
+        setLoginError(state=>({...state, [name]: result}))
+    }
     const goSignupPage = (e: React.MouseEvent) => {
         e.preventDefault();
         setShowForm({ login: false, signup: true, forgot: false })
@@ -32,14 +51,21 @@ const LoginPage: React.FC<{
     };
     const onHandleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const typeInput = e.target.type;
+        handleError(e.target.name, e.target.value, roles)
         setLoginFormData((data)=>({ ...data, [e.target.name]: typeInput === "checkbox" ? e.target.checked : e.target.value }))
+    };
+    const handleFocus=(name: keyof LoginFocusType)=>{
+        if(!focus[name]){
+            setLoginFocus((state)=>({...state, [name]: true}))
+        }
     }
     const onLogin = async(e: React.FormEvent) => {
         e.preventDefault();
+        const {email, password}=data; 
+        if(Object.values(errors).some(f=>f===true)) return ;
         setLoading(true)
         try {
-            const {email, password}=data; 
-            if(email && password){
+            if(email && password ){
                 const resultAction:any= await dispatch(login(data));
                 if(resultAction && resultAction?.payload?.user?.accessToken === TokenService.getLocalAccessToken()){
                     navigate("/")
@@ -47,7 +73,6 @@ const LoginPage: React.FC<{
             }
             setLoading(false)
         } catch (error) {
-            console.log(error);
             setLoading(false)
         }
     };
@@ -60,7 +85,11 @@ const LoginPage: React.FC<{
             <div className={styles["row"]}>
                 <form onSubmit={onLogin}>
                     <div className={styles["form-group"]}>
-                        <input type="email" name="email" className={styles["form-control"]} value={data.email} placeholder='Địa chỉ email' onChange={onHandleChangeInput} />
+                        <input type="email" name="email" className={styles["form-control"]} value={data.email} placeholder='Địa chỉ email' 
+                        onChange={onHandleChangeInput} onFocus={()=>handleFocus("email")}/>
+                        {errors.email && focus.email && <div className="error-input">
+                            <span>Email không đúng định dạng</span>
+                        </div>}
                     </div>
                     <div className={styles["form-group"]}>
                         <div className={styles["pwdMask"]}>
@@ -69,10 +98,15 @@ const LoginPage: React.FC<{
                                 value={data.password}
                                 className={styles["form-control"]}
                                 placeholder='Nhập mật khẩu'
-                                onChange={onHandleChangeInput} />
+                                onChange={onHandleChangeInput}
+                                onFocus={()=>handleFocus("password")}
+                                />
                             {!showPassword ? <FontAwesomeIcon icon={faEyeSlash} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(true)} />
                                 : <FontAwesomeIcon icon={faEye} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(false)} />}
                         </div>
+                        {errors.password && focus.password && <div className="error-input">
+                            <span>Mật khẩu không đúng định dạng</span>
+                        </div>}
                     </div>
                     <div className={styles["remember-password"]}>
                         <div>

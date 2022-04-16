@@ -49,32 +49,88 @@ export const initialSignupFormData: SignupFormDataType = {
 export const initialForgotFormData: forgotFormType = {
   email: ""
 }
+export interface SignUpErrorType{
+  userName: boolean,
+  email: boolean,
+  phoneNumber: boolean,
+  password: boolean,
+}
+export const initialSignUpError={
+  userName: true,
+  email: true,
+  phoneNumber: true,
+  password: true,
+};
+export interface LoginErrorType{
+  email: boolean,
+  password: boolean
+};
+export const initialLoginError={
+  email: true,
+  password: true
+};
+export interface SignUpFocusType{
+  userName: boolean,
+  email: boolean,
+  phoneNumber: boolean,
+  password: boolean,
+};
+export interface LoginFocusType{
+  email: boolean,
+  password: boolean
+};
+export const initialSignUpFocus={
+  userName: false,
+  email: false,
+  phoneNumber: false,
+  password: false,
+};
+export const initialLoginFocus={
+  email: false,
+  password: false
+}
+export 
 const Auth = () => {
   const [showForm, setShowForm] = useState<showFormType>(()=>initialShowForm);
   const [loginFormData, setLoginFormData] = useState<LoginFormDataType>(()=>initialLoginFormData);
   const [signupFormData, setSignupFormData] = useState<SignupFormDataType>(()=>initialSignupFormData);
   const [forgotFormData, setForgotFormData] = useState<forgotFormType>(()=>initialForgotFormData);
+  const [signUpError, setSignUpError]=useState<SignUpErrorType>(()=>initialSignUpError);
+  const [loginError, setLoginError]=useState<LoginErrorType>(()=>initialLoginError)
+  const [signUpFocus, setSignUpFocus]=useState<SignUpFocusType>(()=>initialSignUpFocus);
+  const [loginFocus, setLoginFocus]=useState<LoginFocusType>(()=>initialLoginFocus);
   const [loading, setLoading] = useState<boolean>(() => false);
   useEffect(() => {
     if (showForm.login) {
       setSignupFormData(initialSignupFormData);
-      setForgotFormData(initialForgotFormData)
+      setForgotFormData(initialForgotFormData);
+      setSignUpError(initialSignUpError);
+      setSignUpFocus(initialSignUpFocus);
     }
     else if (showForm.signup) {
       setLoginFormData(initialLoginFormData);
-      setForgotFormData(initialForgotFormData)
+      setForgotFormData(initialForgotFormData);
+      setLoginError(initialLoginError);
+      setLoginFocus(initialLoginFocus);
     }
     else {
       setLoginFormData(initialLoginFormData);
-      setSignupFormData(initialSignupFormData)
+      setLoginError(initialLoginError);
+      setLoginFocus(initialLoginFocus);
+      setSignupFormData(initialSignupFormData);
+      setSignUpError(initialSignUpError);
+      setSignUpFocus(initialSignUpFocus);
     }
     return ()=>{
       setSignupFormData(initialSignupFormData);
+      setSignUpError(initialSignUpError);
+      setSignUpFocus(initialSignUpFocus);
       setLoginFormData(initialLoginFormData);
-      setForgotFormData(initialForgotFormData)
+      setLoginError(initialLoginError);
+      setLoginFocus(initialLoginFocus);
+      setForgotFormData(initialForgotFormData);
     }
   }, [showForm])
-  console.log("showForm", showForm, loginFormData);
   return (
     <div className={styles['container']}>
       <div className={styles["authfy-container"]}>
@@ -107,9 +163,17 @@ const Auth = () => {
         <div className={styles['authfy-panel__right']}>
           <div className={styles["authfy-login"]}>
             {/* panel login start */}
-            <LoginPage showForm={showForm} setShowForm={setShowForm} data={loginFormData} setLoginFormData={setLoginFormData} setLoading={setLoading} />
+            <LoginPage showForm={showForm} setShowForm={setShowForm} data={loginFormData} 
+            setLoginFormData={setLoginFormData} setLoading={setLoading} 
+            errors={loginError} setLoginError={setLoginError}
+            focus={loginFocus} setLoginFocus={setLoginFocus}
+            />
             {/* panel signup start */}
-            <SignupPage showForm={showForm} setShowForm={setShowForm} data={signupFormData} setSignupFormData={setSignupFormData} setLoading={setLoading} />
+            <SignupPage showForm={showForm} setShowForm={setShowForm} data={signupFormData} 
+            setSignupFormData={setSignupFormData} setLoading={setLoading} 
+            errors={signUpError} setSignUpError={setSignUpError}
+            focus={signUpFocus} setSignUpFocus={setSignUpFocus}
+            />
             {/* panel forgot start */}
             <ForgotPage showForm={showForm} setShowForm={setShowForm} data={forgotFormData} setForgotFormData={setForgotFormData} />
           </div>

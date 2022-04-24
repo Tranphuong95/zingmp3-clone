@@ -23,8 +23,10 @@ const register = ({ userName, email, phoneNumber, password }: RegisterType) => {
         // else{
         //     toast.error("An occurred while register");
         // }
+        console.log("res::", res)
         if(res?.data?.message){
-            toast.success(res.data.message)
+            // toast.success(res.data.message);
+            return {data: res.data, status: res.status, statusText: res.statusText}
         }
     }).catch((err)=> {console.log(err); toast.error(err.response.data.message); return {message: err.response.data.message}})
 };

@@ -15,7 +15,7 @@ const MainContent = () => {
           <Routes>
             <Route path="/" element={<Discover />} />
             <Route path="/test-api" element={<TestAPi/>}/>
-            <Route path='*' element={<PageNotFound/>}/>
+            {/* <Route path='*' element={<PageNotFound/>}/> */}
           </Routes>
         </main>
 

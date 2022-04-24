@@ -55,7 +55,7 @@ export interface SignUpErrorType{
   phoneNumber: boolean,
   password: boolean,
 }
-export const initialSignUpError={
+export const initialSignUpError:SignUpErrorType={
   userName: true,
   email: true,
   phoneNumber: true,
@@ -65,9 +65,15 @@ export interface LoginErrorType{
   email: boolean,
   password: boolean
 };
-export const initialLoginError={
+export const initialLoginError:LoginErrorType={
   email: true,
   password: true
+};
+export interface ForgotPasswordErrorType{
+  email: boolean
+};
+export const initialForgotPasswordError: ForgotPasswordErrorType={
+  email: true
 };
 export interface SignUpFocusType{
   userName: boolean,
@@ -75,19 +81,25 @@ export interface SignUpFocusType{
   phoneNumber: boolean,
   password: boolean,
 };
+export interface ForgotPassFocusType{
+  email: boolean
+}
 export interface LoginFocusType{
   email: boolean,
   password: boolean
 };
-export const initialSignUpFocus={
+export const initialSignUpFocus:SignUpFocusType={
   userName: false,
   email: false,
   phoneNumber: false,
   password: false,
 };
-export const initialLoginFocus={
+export const initialLoginFocus:LoginFocusType={
   email: false,
   password: false
+};
+export const initialForgotPassFocus: ForgotPassFocusType={
+  email: false
 }
 export 
 const Auth = () => {
@@ -97,21 +109,27 @@ const Auth = () => {
   const [forgotFormData, setForgotFormData] = useState<forgotFormType>(()=>initialForgotFormData);
   const [signUpError, setSignUpError]=useState<SignUpErrorType>(()=>initialSignUpError);
   const [loginError, setLoginError]=useState<LoginErrorType>(()=>initialLoginError)
+  const [forgotPasswordError, setForgotPasswordError]=useState(()=>initialForgotPasswordError);   
   const [signUpFocus, setSignUpFocus]=useState<SignUpFocusType>(()=>initialSignUpFocus);
   const [loginFocus, setLoginFocus]=useState<LoginFocusType>(()=>initialLoginFocus);
+  const [forgotPassFocus, setForgotPassFocus]=useState<ForgotPassFocusType>(()=>initialForgotPassFocus)
   const [loading, setLoading] = useState<boolean>(() => false);
   useEffect(() => {
     if (showForm.login) {
       setSignupFormData(initialSignupFormData);
       setForgotFormData(initialForgotFormData);
       setSignUpError(initialSignUpError);
+      setForgotPasswordError(initialForgotPasswordError)
       setSignUpFocus(initialSignUpFocus);
+      setForgotPassFocus(initialForgotPassFocus)
     }
     else if (showForm.signup) {
       setLoginFormData(initialLoginFormData);
       setForgotFormData(initialForgotFormData);
       setLoginError(initialLoginError);
+      setForgotPasswordError(initialForgotPasswordError)
       setLoginFocus(initialLoginFocus);
+      setForgotPassFocus(initialForgotPassFocus)
     }
     else {
       setLoginFormData(initialLoginFormData);
@@ -129,6 +147,8 @@ const Auth = () => {
       setLoginError(initialLoginError);
       setLoginFocus(initialLoginFocus);
       setForgotFormData(initialForgotFormData);
+      setForgotPasswordError(initialForgotPasswordError);
+      setForgotPassFocus(initialForgotPassFocus)
     }
   }, [showForm])
   return (
@@ -175,7 +195,11 @@ const Auth = () => {
             focus={signUpFocus} setSignUpFocus={setSignUpFocus}
             />
             {/* panel forgot start */}
-            <ForgotPage showForm={showForm} setShowForm={setShowForm} data={forgotFormData} setForgotFormData={setForgotFormData} />
+            <ForgotPage showForm={showForm} setShowForm={setShowForm} data={forgotFormData} 
+            setForgotFormData={setForgotFormData} setLoading={setLoading}
+            errors={forgotPasswordError} setForgotPasswordError={setForgotPasswordError}
+            focus={forgotPassFocus} setForgotPassFocus={setForgotPassFocus}
+            />
           </div>
         </div>
       </div>

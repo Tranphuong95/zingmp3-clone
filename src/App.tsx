@@ -13,8 +13,10 @@ import api from "./services/api";
 import { AUTH_URL } from './config/urlConfig';
 import TokenService from './services/token.service';
 import { PrivateLogin, PrivateRoute } from './until-component/PrivateRoute';
-import LoginPage from './components/LoginPage';
+import LoginPage from './components/loginPage';
 import { useAppSelector } from './app/hooks';
+import ResetPassword from './components/resetPassword';
+import PageNotFound from './page404/PageNotFound';
 
 type profileType = {
   id: string,
@@ -70,9 +72,12 @@ function App() {
         autoClose={2000}
       />
       <Routes>
-        <Route path="/*" element={<PrivateRoute><PublishPage /></PrivateRoute>} />
+        {/* <Route path="/*" element={<PrivateRoute><PublishPage /></PrivateRoute>} /> */}
+        <Route path='/:userId/:resetString' element={<ResetPassword/>}/>
+        <Route path="/" element={<PublishPage />} />
         <Route path='/login' element={<PrivateLogin><LoginPage /></PrivateLogin>} />
         {profile.roles === "admin" && <Route path="/admin" element={<AdminPage profile={profile} />} />}
+        <Route path='*' element={<PageNotFound/>}/>
       </Routes>
     </>
   );

@@ -1,0 +1,51 @@
+.md-container {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .modal {
+        position: absolute;
+        width: 40%;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 50px;
+        background-color: white;
+        text-align: center;
+        color: black;
+        .md-icon {
+            width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            background-color: white;
+        }
+
+        .md-title {
+
+        }
+        .md-content{
+
+        }
+        .md-btn{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 40px;
+            button{
+                font-size: 1.1rem;
+                font-weight: 500;
+                padding: 8px 16px;
+                border-radius: 5px;
+                color: white
+            }
+            .md-ok{
+                background-color: green;
+            }
+            .md-cancel{
+                background-color: rgb(255, 102, 0);
+            }
+        }
+    }
+
+}

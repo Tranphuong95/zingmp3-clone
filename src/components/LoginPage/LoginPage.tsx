@@ -1,7 +1,7 @@
 import "./index.scss";
 import React, { useState } from 'react'
 import styles from "./login-page.module.scss";
-import { LoginErrorType, LoginFocusType, LoginFormDataType, showFormType } from ".";
+import { LoginErrorType, LoginFocusType, LoginFormDataType, showFormType, initialLoginFocus } from ".";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
@@ -61,17 +61,19 @@ const LoginPage: React.FC<{
     }
     const onLogin = async(e: React.FormEvent) => {
         e.preventDefault();
+        setLoginFocus({email: true, password:true  });
         const {email, password}=data; 
         if(Object.values(errors).some(f=>f===true)) return ;
-        setLoading(true)
+        setLoading(true);
         try {
             if(email && password ){
                 const resultAction:any= await dispatch(login(data));
                 if(resultAction && resultAction?.payload?.user?.accessToken === TokenService.getLocalAccessToken()){
                     navigate("/")
-                }
+                };
             }
             setLoading(false)
+            setLoginFocus(initialLoginFocus);
         } catch (error) {
             setLoading(false)
         }

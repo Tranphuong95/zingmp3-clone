@@ -3,14 +3,15 @@ import styles from "./login-page.module.scss";
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import * as EmailValidate from "email-validator";
 import { toast } from "react-toastify";
-import { showFormType, SignUpErrorType, SignUpFocusType, SignupFormDataType } from ".";
+import { initialSignUpFocus, showFormType, SignUpErrorType, SignUpFocusType, SignupFormDataType } from ".";
 import { register } from "../../features/auth/auth";
 import { useNavigate } from "react-router-dom";
 import TokenService from "../../services/token.service";
 import { SignUpErrorRoles } from "@/helper/roleError";
+import Modal from "@/helper/modal/Modal";
 
 const SignupPage: React.FC<{
     showForm: showFormType,
@@ -25,6 +26,7 @@ const SignupPage: React.FC<{
 }> = ({ showForm, setShowForm, data, setSignupFormData, setLoading, errors, setSignUpError, focus, setSignUpFocus }) => {
 
     const [showPassword, setShowPassword] = useState<boolean>(() => false);
+    const [open, setOpen]=useState<boolean>(()=>false)
     const dispatch=useDispatch();
     const navigate=useNavigate();
     const handleChangeShowPassword = (val: boolean) => {
@@ -55,6 +57,7 @@ const SignupPage: React.FC<{
     }
     const onSignup=async(e:React.FormEvent)=>{
         e.preventDefault();
+        setSignUpFocus({email: true, password: true, phoneNumber: true, userName: true})
         const { userName, email, password, phoneNumber } = data;
         if(Object.values(errors).some(f=>f===true)) return ;
         setLoading(true);
@@ -66,15 +69,21 @@ const SignupPage: React.FC<{
             }
             if (!userName || !email || !phoneNumber || typeof phoneNumber !== "number" || !password) return;
             const resultAction: any = await dispatch(register({ userName, email, phoneNumber, password }));
-            if(resultAction && resultAction?.payload?.accessToken && resultAction?.payload?.accessToken=== TokenService.getLocalAccessToken()){
-                navigate("/")
+            console.log("resultAction::", resultAction)
+            // if(resultAction && resultAction?.payload?.accessToken && resultAction?.payload?.accessToken=== TokenService.getLocalAccessToken()){
+            //     navigate("/")
+            // }
+            if(resultAction.payload.status===200){
+                setOpen(true);
             }
-            setLoading(false)
+            setLoading(false);
+            setSignUpFocus(initialSignUpFocus)
         } catch (error) {
             setLoading(false)
         }
     }
     return (
+        <>
         <div className={`${styles["authfy-panel"]} ${styles["panel-signup"]} text-center ${showForm?.signup ? "active" : ""}`} id="panel-signup">
             <div className={styles["authfy-heading"]} >
                 <h3 className={styles["authfy-title"]}>Đăng ký tài khoản zing</h3>
@@ -90,7 +99,7 @@ const SignupPage: React.FC<{
                          onFocus={()=>handleFocus("userName")}
                          />
                          {errors.userName && focus.userName && <div className="error-input">
-                            <span>Email không đúng định dạng</span>
+                            <span>Tên người dùng không đúng định dạng</span>
                         </div>}
                     </div>
                     <div className={styles["form-group"]}>
@@ -116,7 +125,7 @@ const SignupPage: React.FC<{
                         onFocus={()=>handleFocus("phoneNumber")}
                         />
                         {errors.phoneNumber && focus.phoneNumber && <div className="error-input">
-                            <span>Email không đúng định dạng</span>
+                            <span>Số điện thoại không đúng định dạng</span>
                         </div>}
                     </div>
                     <div className={styles["form-group"]}>
@@ -133,7 +142,7 @@ const SignupPage: React.FC<{
                                 : <FontAwesomeIcon icon={faEye} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(false)} />}
                         </div>
                         {errors.password && focus.password && <div className="error-input">
-                            <span>Email không đúng định dạng</span>
+                            <span>Mật khẩu không đúng định dạng</span>
                         </div>}
                     </div>
                     <div className={styles["form-group"]}>
@@ -143,6 +152,13 @@ const SignupPage: React.FC<{
                 <button className={`${styles["btn-panel__login"]} btn`} onClick={goLoginPage}>Bạn đã có tài khoản? Đăng nhập ngay</button>
             </div>
         </div>
+            <Modal open={open} title={"Đăng ký thành công"} 
+            content="Bạn đã đăng ký thành công. Vui lòng xác thực mail mà chúng tôi gửi đến hộp thư để hoàn thành đăng ký"
+            onClose={setOpen} icon={<FontAwesomeIcon icon={faCircleCheck} style={{color: "green", fontSize: "3rem"}}/>}
+            navigate={navigate}
+            isOkBtn={false}
+            />
+            </>
 
     )
 }

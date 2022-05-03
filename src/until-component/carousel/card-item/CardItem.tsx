@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faEllipsis, faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { getTextWidth } from "../../../until/getText";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 export const CardItem: React.FC<{ icon?: React.ReactNode, imgUrl?: string, textContent?: string }> = ({ icon, imgUrl, textContent }) => {
   const playMusic = (event: React.MouseEvent) => {
     const icon = event.target as HTMLElement;
@@ -143,14 +144,14 @@ export const CardPlayList: React.FC<{ href?: string, title?: string, imgUrl?: st
                     <div className="actions-container">
                       <div className="box actions playlist-actions">
                         <button className="btn tooltip-btn animation-like active is-hover-circle button" tabIndex={0} onClick={handleAddToLikeList}>
-                          {isDone ? <FontAwesomeIcon icon={faHeartSolid} className="icon is-like-full" /> : <FontAwesomeIcon icon={faHeartRegular} className="icon" />}
-                          <FontAwesomeIcon icon={faHeartSolid} className="icon is-like-full" />
+                          {isDone ? <FontAwesomeIcon icon={faHeartSolid as IconProp} className="icon is-like-full" /> : <FontAwesomeIcon icon={faHeartRegular as IconProp} className="icon" />}
+                          <FontAwesomeIcon icon={faHeartSolid as IconProp} className="icon is-like-full" />
                         </button>
                         <button className="btn action-play button" onClick={playMusic}>
                           <i className="icon action-play ic-svg-play-circle"></i>
                         </button>
                         <button className="btn tooltip-btn  active is-hover-circle button" tabIndex={0}>
-                          <FontAwesomeIcon icon={faEllipsis} className="icon-ellipsis" />
+                          <FontAwesomeIcon icon={faEllipsis as IconProp} className="icon-ellipsis" />
                         </button>
                       </div>
                     </div>

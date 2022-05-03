@@ -5,6 +5,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { Link } from 'react-router-dom';
 import { CardItem, CardPlayList } from "../../../../../until-component/carousel/card-item/CardItem";
 import { IconPlay } from "./../../../../../until-component/IconList";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 type listCardProps={
   textContent?: string, 
   imgUrl?: string,
@@ -19,7 +20,7 @@ const HomeRecent: React.FC<{ title?: string, listCard?: Array<listCardProps>}> =
         <h3 className='section-title title is-2'>{title}
           <Link to="/mymusic/history" className='discovery-btn'>
             Tất cả
-            <FontAwesomeIcon icon={faChevronRight} className="icon" />
+            <FontAwesomeIcon icon={faChevronRight as IconProp} className="icon" />
           </Link>
         </h3>
 
@@ -37,10 +38,10 @@ const HomeRecent: React.FC<{ title?: string, listCard?: Array<listCardProps>}> =
           </div>
         </div>
         <button className="btn carousel-control-prev disabled is-hidden button" tabIndex={0}>
-          <FontAwesomeIcon icon={faChevronLeft} className="icon"/>
+          <FontAwesomeIcon icon={faChevronLeft as IconProp} className="icon"/>
         </button>
         <button className="btn carousel-control-next disabled is-hidden button" tabIndex={0}>
-          <FontAwesomeIcon icon={faChevronRight} className="icon"/>
+          <FontAwesomeIcon icon={faChevronRight as IconProp} className="icon"/>
         </button>
       </div>
     </div>

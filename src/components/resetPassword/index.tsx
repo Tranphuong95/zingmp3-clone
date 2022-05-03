@@ -6,6 +6,7 @@ import styles from "./index.module.scss";
 import { LoginErrorRoles as roles } from "@/helper/roleError";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 export interface ResetPasswordInterface {
     password: string,
     verifyPassword: string
@@ -87,8 +88,8 @@ const ResetPassword: React.FC = () => {
                                 onChange={onHandleChangeInput}
                                 onFocus={() => handleFocus("password")}
                             />
-                            {!showPassword.password ? <FontAwesomeIcon icon={faEyeSlash} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword("password", true)} />
-                                : <FontAwesomeIcon icon={faEye} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword("password", false)} />}
+                            {!showPassword.password ? <FontAwesomeIcon icon={faEyeSlash as IconProp} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword("password", true)} />
+                                : <FontAwesomeIcon icon={faEye as IconProp} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword("password", false)} />}
                         </div>
                         {errors.password && focus.password && <div className="error-input">
                             <span>Mật khẩu không đúng định dạng</span>
@@ -104,8 +105,8 @@ const ResetPassword: React.FC = () => {
                                 onChange={onHandleChangeInput}
                                 onFocus={() => handleFocus("verifyPassword")}
                             />
-                            {!showPassword.verifyPassword ? <FontAwesomeIcon icon={faEyeSlash} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword("verifyPassword", true)} />
-                                : <FontAwesomeIcon icon={faEye} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword("verifyPassword", false)} />}
+                            {!showPassword.verifyPassword ? <FontAwesomeIcon icon={faEyeSlash as IconProp} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword("verifyPassword", true)} />
+                                : <FontAwesomeIcon icon={faEye as IconProp} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword("verifyPassword", false)} />}
                         </div>
                         {errors.verifyPassword && focus.verifyPassword && <div className="error-input">
                             <span>Mật khẩu không đúng định dạng</span>

@@ -74,9 +74,9 @@ function App() {
       <Routes>
         {/* <Route path="/*" element={<PrivateRoute><PublishPage /></PrivateRoute>} /> */}
         <Route path='/:userId/:resetString' element={<ResetPassword/>}/>
-        <Route path="/" element={<PublishPage />} />
         <Route path='/login' element={<PrivateLogin><LoginPage /></PrivateLogin>} />
         {profile.roles === "admin" && <Route path="/admin" element={<AdminPage profile={profile} />} />}
+        <Route path="/" element={<PublishPage />} />
         <Route path='*' element={<PageNotFound/>}/>
       </Routes>
     </>

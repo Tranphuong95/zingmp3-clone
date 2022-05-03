@@ -4,6 +4,7 @@ import { faAdd, faAddressCard, faChartLine, faClockRotateLeft, faFileAudio, faIc
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../../styles/layout/sidebar.module.scss';
 import ToolTip from '../../until-component/tooltip';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const SideBar: React.FC = () => {
   const SIDEBAR_MENU_ITEM = {
@@ -215,24 +216,24 @@ const SideBar: React.FC = () => {
           <ul className={styles["navbar-menu"]}>
             <li className={`${styles["navbar-item"]} sidebar-lib ${location.pathname==="/mymusic"?"is-active":""}`} onClick={()=>navigate("/mymusic")}>
               <a title='Cá nhân' >
-                <FontAwesomeIcon icon={faAddressCard} style={SIDEBAR_MENU_ITEM} />
+                <FontAwesomeIcon icon={faAddressCard as IconProp} style={SIDEBAR_MENU_ITEM} />
                 <span>Cá nhân</span>
               </a>
             </li>
             <li className={`${styles["navbar-item"]} ${location.pathname==="/"?"is-active":""}`} onClick={()=>navigate("/")}>
               <a title="Khám phá">
-                <FontAwesomeIcon icon={faRecordVinyl} style={SIDEBAR_MENU_ITEM} />
+                <FontAwesomeIcon icon={faRecordVinyl as IconProp} style={SIDEBAR_MENU_ITEM} />
                 <span>Khám phá</span>
               </a>
             </li>
             <li className={`${styles["navbar-item"]} ${location.pathname==="/zing-chart"?"is-active":""}`} onClick={()=>navigate("/zing-chart")}>
               <a title="#zingchart">
-                <FontAwesomeIcon icon={faChartLine} style={SIDEBAR_MENU_ITEM} />
+                <FontAwesomeIcon icon={faChartLine as IconProp} style={SIDEBAR_MENU_ITEM} />
                 <span>#zingchart</span>
               </a></li>
             <li className={`${styles["navbar-item"]} ${location.pathname==="/radio"?"is-active":""}`} onClick={()=>navigate("/radio")}>
               <a title="Radio">
-                <FontAwesomeIcon icon={faPodcast} style={SIDEBAR_MENU_ITEM} />
+                <FontAwesomeIcon icon={faPodcast as IconProp} style={SIDEBAR_MENU_ITEM} />
                 <span>Radio</span>
                 <figure className={`${styles.tag} ${styles["is-48x48"]}`}>
                   <img src="https://zjs.zadn.vn/zmp3-desktop/dev/147506/static/media/live-tag.e25dd240.svg" alt="" />
@@ -240,7 +241,7 @@ const SideBar: React.FC = () => {
               </a></li>
             <li className={`${styles["navbar-item"]} ${location.pathname?.split("/")[1]==="the-loai-nghe-si"?"is-active":""}`} onClick={()=>navigate("/the-loai-nghe-si/Viet-Nam/IWZ9Z08I.html")}>
               <a title="Theo dõi">
-                <FontAwesomeIcon icon={faNoteSticky} style={SIDEBAR_MENU_ITEM} />
+                <FontAwesomeIcon icon={faNoteSticky as IconProp} style={SIDEBAR_MENU_ITEM} />
                 <span>Theo dõi</span>
               </a></li>
           </ul>
@@ -253,25 +254,25 @@ const SideBar: React.FC = () => {
               <ul className={styles["navbar-menu"]}>
                 <li className={`${styles["navbar-item"]} ${location.pathname==="/moi-phat-hanh"?"is-active":""}`} onClick={()=>navigate("/moi-phat-hanh")}>
                   <a title="Nhạc mới">
-                    <FontAwesomeIcon icon={faMusic} style={SIDEBAR_MENU_ITEM} />
+                    <FontAwesomeIcon icon={faMusic as IconProp} style={SIDEBAR_MENU_ITEM} />
                     <span>Nhạc mới</span>
                   </a>
                 </li>
                 <li className={`${styles["navbar-item"]} ${location.pathname==="/hub"?"is-active":""}`} onClick={()=>navigate("/hub")}>
                   <a title="Thể loại">
-                    <FontAwesomeIcon icon={faIcons} style={SIDEBAR_MENU_ITEM} />
+                    <FontAwesomeIcon icon={faIcons as IconProp} style={SIDEBAR_MENU_ITEM} />
                     <span>Thể loại</span>
                   </a>
                 </li>
                 <li className={`${styles["navbar-item"]} ${location.pathname==="/top100"?"is-active":""}`} onClick={()=>navigate("/top100")}>
                   <a title="Top 100">
-                    <FontAwesomeIcon icon={faStar} style={SIDEBAR_MENU_ITEM} />
+                    <FontAwesomeIcon icon={faStar as IconProp} style={SIDEBAR_MENU_ITEM} />
                     <span>Top 100</span>
                   </a>
                 </li>
                 <li className={`${styles["navbar-item"]} ${location.pathname?.split("/")[1]==="the-loai-video"?"is-active":""}`} onClick={()=>navigate("/the-loai-video/Viet-Nam/IWZ9Z08I.html")}>
                   <a title="MV">
-                    <FontAwesomeIcon icon={faTicket} style={SIDEBAR_MENU_ITEM} />
+                    <FontAwesomeIcon icon={faTicket as IconProp} style={SIDEBAR_MENU_ITEM} />
                     <span>MV</span>
                   </a></li>
               </ul>
@@ -284,26 +285,26 @@ const SideBar: React.FC = () => {
               <div className={`${styles["main-title"]} ${styles.title}`}>THƯ VIỆN
                 {/* <ToolTip toolTipText='Chỉnh sủa'> */}
                 <button className={`${styles["edit-btn"]} btn is-hover-circle`} tabIndex={0}>
-                  <FontAwesomeIcon icon={faPen} style={{ fontSize: 16, color: "white" }} />
+                  <FontAwesomeIcon icon={faPen as IconProp} style={{ fontSize: 16, color: "white" }} />
                 </button>
                 {/* </ToolTip> */}
               </div>
               <ul className={`${styles["navbar-menu"]} ${styles["library-personal"]}`}>
                 <li className={styles["navbar-item"]}>
                   <a href='mymusic/library/song'>
-                    <FontAwesomeIcon icon={faFileAudio} style={SIDEBAR_MENU_ITEM} />
+                    <FontAwesomeIcon icon={faFileAudio as IconProp} style={SIDEBAR_MENU_ITEM} />
                     <span>Bài hát</span>
                   </a>
                 </li>
                 <li className={styles["navbar-item"]}>
                   <a href='mymusic/library/playlist'>
-                    <FontAwesomeIcon icon={faList} style={SIDEBAR_MENU_ITEM} />
+                    <FontAwesomeIcon icon={faList as IconProp} style={SIDEBAR_MENU_ITEM} />
                     <span>Playlist</span>
                   </a>
                 </li>
                 <li className={styles["navbar-item"]}>
                   <a href='mymusic/history'>
-                    <FontAwesomeIcon icon={faClockRotateLeft} style={SIDEBAR_MENU_ITEM} />
+                    <FontAwesomeIcon icon={faClockRotateLeft as IconProp} style={SIDEBAR_MENU_ITEM} />
                     <span>Gần đây</span>
                   </a>
                 </li>
@@ -340,7 +341,7 @@ const SideBar: React.FC = () => {
         </div>
         <div className={styles['add-playlist-sidebar']}>
           <button className={`${styles["btn-add-playlist"]} btn`} style={{ backgroundColor: "transparent" }} tabIndex={0}>
-            <FontAwesomeIcon icon={faAdd} style={{ fontSize: 18, marginRight: 10, color: "var(--text-primary)", lineHeight: "66%", display: "inline-block" }} />
+            <FontAwesomeIcon icon={faAdd as IconProp} style={{ fontSize: 18, marginRight: 10, color: "var(--text-primary)", lineHeight: "66%", display: "inline-block" }} />
             <span>Tạo playlist mới</span>
           </button>
         </div>

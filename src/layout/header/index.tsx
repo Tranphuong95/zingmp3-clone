@@ -9,6 +9,7 @@ import TokenService from '@/services/token.service';
 import { Button } from '@/until-component/component';
 import { useAppDispatch } from '@/app/hooks';
 import { logout } from '@/features/auth/auth';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 // import { logout } from '@/features/auth/auth';
 export const UserDialog:React.FC<{open: boolean, iconStyle: any}> = ({ open, iconStyle }) => {
     const navigate=useNavigate();
@@ -26,7 +27,7 @@ export const UserDialog:React.FC<{open: boolean, iconStyle: any}> = ({ open, ico
                 <li className={styles["header-player-setting"]}>
                     <a href="/vip" target="_blank">
                         <Button className="zm-btn btn">
-                            <FontAwesomeIcon icon={faGem} style={iconStyle} />
+                            <FontAwesomeIcon icon={faGem as IconProp} style={iconStyle} />
                             <span>Nâng cấp VIP</span>
                         </Button>
                     </a>
@@ -34,7 +35,7 @@ export const UserDialog:React.FC<{open: boolean, iconStyle: any}> = ({ open, ico
                 <li className={styles["header-player-setting"]}>
                     <a href="vip" target="_blank">
                         <Button className="zm-btn btn">
-                            <FontAwesomeIcon icon={faGem} style={iconStyle} />
+                            <FontAwesomeIcon icon={faGem as IconProp} style={iconStyle} />
                             <span>Mua code VIP</span>
                         </Button>
                     </a>
@@ -42,7 +43,7 @@ export const UserDialog:React.FC<{open: boolean, iconStyle: any}> = ({ open, ico
                 <li className={`${styles["header-player-setting"]} ${styles["logout-header"]}`}>
                     <a>
                         <Button className="zm-btn btn" onClick={onLogout}>
-                            <FontAwesomeIcon  icon={faArrowRightFromBracket} style={iconStyle}/>
+                            <FontAwesomeIcon  icon={faArrowRightFromBracket as IconProp} style={iconStyle}/>
                             <span>Đăng xuất</span>
                         </Button>
                     </a>
@@ -86,15 +87,15 @@ const Header: React.FC = () => {
             <div className={styles.level}>
                 <div className={styles["level-left"]}>
                     <button className={`${styles["btn-icon"]} btn`}>
-                        <FontAwesomeIcon icon={faArrowLeftLong} color="white" style={{ marginRight: 20, fontSize: 24 }} tabIndex={0} />
+                        <FontAwesomeIcon icon={faArrowLeftLong as IconProp} color="white" style={{ marginRight: 20, fontSize: 24 }} tabIndex={0} />
                     </button>
                     <button className={`${styles["btn-icon"]} btn`}>
-                        <FontAwesomeIcon icon={faArrowRightLong} color="white" style={{ marginRight: 20, fontSize: 24 }} tabIndex={0} />
+                        <FontAwesomeIcon icon={faArrowRightLong as IconProp} color="white" style={{ marginRight: 20, fontSize: 24 }} tabIndex={0} />
                     </button>
                     <form className={styles.search} id="form-search">
                         <div className={isFocus ? `${styles["search-container"]} ${styles["is-collapse"]}` : styles["search-container"]}>
                             <button className={`${styles["btn-search"]} btn`} tabIndex={0}>
-                                <FontAwesomeIcon icon={faSearch} color="white" style={{
+                                <FontAwesomeIcon icon={faSearch as IconProp} color="white" style={{
                                     position: "absolute",
                                     fontSize: 20,
                                     cursor: "pointer",
@@ -112,31 +113,31 @@ const Header: React.FC = () => {
                                 <div className={styles['suggest-list__content']}>
                                     <div className={styles["suggest-title"]}>Đề xuất cho bạn</div>
                                     <li className={styles["suggest-item"]}>
-                                        <FontAwesomeIcon icon={faArrowTrendUp} style={SUGGEST_LIST_ICON} />
+                                        <FontAwesomeIcon icon={faArrowTrendUp as IconProp} style={SUGGEST_LIST_ICON} />
                                         <div className={styles["is-oneline"]}>
                                             <span>chạy về khóc</span>
                                         </div>
                                     </li>
                                     <li className={styles["suggest-item"]}>
-                                        <FontAwesomeIcon icon={faArrowTrendUp} style={SUGGEST_LIST_ICON} />
+                                        <FontAwesomeIcon icon={faArrowTrendUp as IconProp} style={SUGGEST_LIST_ICON} />
                                         <div className={styles["is-oneline"]}>
                                             <span>thay mọi cô gái</span>
                                         </div>
                                     </li>
                                     <li className={styles["suggest-item"]}>
-                                        <FontAwesomeIcon icon={faArrowTrendUp} style={SUGGEST_LIST_ICON} />
+                                        <FontAwesomeIcon icon={faArrowTrendUp as IconProp} style={SUGGEST_LIST_ICON} />
                                         <div className={styles["is-oneline"]}>
                                             <span>đơn phương</span>
                                         </div>
                                     </li>
                                     <li className={styles["suggest-item"]}>
-                                        <FontAwesomeIcon icon={faArrowTrendUp} style={SUGGEST_LIST_ICON} />
+                                        <FontAwesomeIcon icon={faArrowTrendUp as IconProp} style={SUGGEST_LIST_ICON} />
                                         <div className={styles["is-oneline"]}>
                                             <span>#zingchart</span>
                                         </div>
                                     </li>
                                     <li className={styles["suggest-item"]}>
-                                        <FontAwesomeIcon icon={faArrowTrendUp} style={SUGGEST_LIST_ICON} />
+                                        <FontAwesomeIcon icon={faArrowTrendUp as IconProp} style={SUGGEST_LIST_ICON} />
                                         <div className={styles["is-oneline"]}>
                                             <span>zing choice</span>
                                         </div>
@@ -150,14 +151,14 @@ const Header: React.FC = () => {
                     <div className={styles['setting-item']}>
                         <ToolTip toolTipText='Chủ đề'>
                             <button className={`${styles["tooltip-btn"]} btn`}>
-                                <FontAwesomeIcon icon={faShirt} style={STYLE_RIGHT_HEADER_ICON} />
+                                <FontAwesomeIcon icon={faShirt as IconProp} style={STYLE_RIGHT_HEADER_ICON} />
                             </button>
                         </ToolTip>
                     </div>
                     <a className={styles['setting-item']} href="https://zingmp3.vn/vip?utm_source=desktop&utm_campaign=VIP&utm_medium=icon-header" target={"_blank"} rel="noreferrer">
                         <ToolTip toolTipText='Nâng cấp VIP'>
                             <button className={`${styles["tooltip-btn"]} btn`}>
-                                <FontAwesomeIcon icon={faGem} style={STYLE_RIGHT_HEADER_ICON} />
+                                <FontAwesomeIcon icon={faGem as IconProp} style={STYLE_RIGHT_HEADER_ICON} />
                             </button>
                         </ToolTip>
                     </a>
@@ -167,7 +168,7 @@ const Header: React.FC = () => {
                             <a tabIndex={0}>
                                 <ToolTip toolTipText='Tải lên'>
                                     <div className={`${styles["tooltip-btn"]} btn`}>
-                                        <FontAwesomeIcon icon={faArrowUpFromBracket} style={STYLE_RIGHT_HEADER_ICON} />
+                                        <FontAwesomeIcon icon={faArrowUpFromBracket as IconProp} style={STYLE_RIGHT_HEADER_ICON} />
                                     </div>
                                 </ToolTip>
                             </a>
@@ -176,7 +177,7 @@ const Header: React.FC = () => {
                     <div className={styles["setting-item"]}>
                         <ToolTip toolTipText="Cài đặt">
                             <button className={`${styles["tooltip-btn"]} btn`} tabIndex={0}>
-                                <FontAwesomeIcon icon={faGear} style={STYLE_RIGHT_HEADER_ICON} />
+                                <FontAwesomeIcon icon={faGear as IconProp} style={STYLE_RIGHT_HEADER_ICON} />
                             </button>
                         </ToolTip>
                     </div>

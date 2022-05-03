@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import TokenService from "@/services/token.service";
 
 import { LoginErrorRoles as roles} from "@/helper/roleError";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const LoginPage: React.FC<{
     showForm: showFormType,
@@ -68,7 +69,7 @@ const LoginPage: React.FC<{
         try {
             if(email && password ){
                 const resultAction:any= await dispatch(login(data));
-                if(resultAction && resultAction?.payload?.user?.accessToken === TokenService.getLocalAccessToken()){
+                if(TokenService.getLocalAccessToken() && resultAction && resultAction?.payload?.user?.accessToken === TokenService.getLocalAccessToken()){
                     navigate("/")
                 };
             }
@@ -103,8 +104,8 @@ const LoginPage: React.FC<{
                                 onChange={onHandleChangeInput}
                                 onFocus={()=>handleFocus("password")}
                                 />
-                            {!showPassword ? <FontAwesomeIcon icon={faEyeSlash} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(true)} />
-                                : <FontAwesomeIcon icon={faEye} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(false)} />}
+                            {!showPassword ? <FontAwesomeIcon icon={faEyeSlash as IconProp} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(true)} />
+                                : <FontAwesomeIcon icon={faEye as IconProp} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(false)} />}
                         </div>
                         {errors.password && focus.password && <div className="error-input">
                             <span>Mật khẩu không đúng định dạng</span>

@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import TokenService from "../../services/token.service";
 import { SignUpErrorRoles } from "@/helper/roleError";
 import Modal from "@/helper/modal/Modal";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 const SignupPage: React.FC<{
     showForm: showFormType,
@@ -138,8 +139,8 @@ const SignupPage: React.FC<{
                             onChange={onHandleChangeInput}
                             onFocus={()=>handleFocus("password")}
                              />
-                            {!showPassword ? <FontAwesomeIcon icon={faEyeSlash} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(true)} />
-                                : <FontAwesomeIcon icon={faEye} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(false)} />}
+                            {!showPassword ? <FontAwesomeIcon icon={faEyeSlash as IconProp} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(true)} />
+                                : <FontAwesomeIcon icon={faEye as IconProp} className={styles["pwd-toggle"]} onClick={() => handleChangeShowPassword(false)} />}
                         </div>
                         {errors.password && focus.password && <div className="error-input">
                             <span>Mật khẩu không đúng định dạng</span>
@@ -154,7 +155,7 @@ const SignupPage: React.FC<{
         </div>
             <Modal open={open} title={"Đăng ký thành công"} 
             content="Bạn đã đăng ký thành công. Vui lòng xác thực mail mà chúng tôi gửi đến hộp thư để hoàn thành đăng ký"
-            onClose={setOpen} icon={<FontAwesomeIcon icon={faCircleCheck} style={{color: "green", fontSize: "3rem"}}/>}
+            onClose={setOpen} icon={<FontAwesomeIcon icon={faCircleCheck as IconProp} style={{color: "green", fontSize: "3rem"}}/>}
             navigate={navigate}
             isOkBtn={false}
             />

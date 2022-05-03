@@ -16,6 +16,6 @@ export const getTextWidth = (content: string, fontSize: string) => {
   // const width = Math.ceil(text.clientWidth);
   const width = text.clientWidth;
   document.body.removeChild(text);
-
+  console.log("width::", width)
   return width
 }

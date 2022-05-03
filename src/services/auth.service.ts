@@ -46,7 +46,7 @@ const login = ({ email, password, remember }: LoginType) => {
             toast.error("An occurred while login. Please try login again");
         }
     })
-    .catch((err)=> {console.log(err); toast.error(err.response.data.message);return {message: err.response.data.message}})
+    .catch((err)=> {console.log(err, err.message); toast.error(err?.response?.data?.message || "Login Fail! Please try again");return {message: err?.response?.data?.message||"Login Fail! Please try again"}})
 };
 const logout = () => {
     // TokenService.removeUser();

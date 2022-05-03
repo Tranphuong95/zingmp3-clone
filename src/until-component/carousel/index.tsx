@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import CardCarousel from './CardCarousel';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 type ListProps = {
     title: string,
@@ -99,7 +100,7 @@ const Carousel: React.FC<{ list: Array<ListProps>, timeDelay?: number }> = ({ li
                 <div className='gallery-container' id="gallery-container">
                     <div className='gallery-prev'>
                         <button className='btn carousel-control-prev' id="carousel-control-prev" tabIndex={0}>
-                            <FontAwesomeIcon icon={faChevronLeft} />
+                            <FontAwesomeIcon icon={faChevronLeft as IconProp} />
                         </button>
                     </div>
 
@@ -124,7 +125,7 @@ const Carousel: React.FC<{ list: Array<ListProps>, timeDelay?: number }> = ({ li
 
                     <div className='gallery-next'>
                         <button className='btn carousel-control-next' id="carousel-control-next" tabIndex={0}>
-                            <FontAwesomeIcon icon={faChevronRight} />
+                            <FontAwesomeIcon icon={faChevronRight as IconProp} />
                         </button>
                     </div>
                 </div>

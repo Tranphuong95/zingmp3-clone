@@ -10,6 +10,7 @@ import ReactLoading from 'react-loading';
 import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import ForgotPage from "./ForgotPage";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 export type showFormType = {
   login: boolean,
@@ -165,15 +166,15 @@ const Auth = () => {
               <p>Đăng nhập bằng mạng xã hội</p>
               <div className={styles["social-buttons"]}>
                 <button className={`${styles["btn-social"]} ${styles["face-btn"]} btn`}>
-                  <FontAwesomeIcon icon={faFacebookF} className={styles["social-icon"]} />
+                  <FontAwesomeIcon icon={faFacebookF as IconProp} className={styles["social-icon"]} />
                   <span className="hidden-xs hidden-sm">Đăng nhập bằng Facebook</span>
                 </button>
                 <button className={`${styles["btn-social"]} ${styles["twitter-btn"]} btn`}>
-                  <FontAwesomeIcon icon={faTwitter} className={styles["social-icon"]} />
+                  <FontAwesomeIcon icon={faTwitter as IconProp} className={styles["social-icon"]} />
                   <span className="hidden-xs hidden-sm">Đăng nhập bằng Twitter</span>
                 </button>
                 <button className={`${styles["btn-social"]} ${styles["google-btn"]} btn`}>
-                  <FontAwesomeIcon icon={faGooglePlusG} className={styles["social-icon"]} />
+                  <FontAwesomeIcon icon={faGooglePlusG as IconProp} className={styles["social-icon"]} />
                   <span className="hidden-xs hidden-sm">Đăng nhập bằng Google</span>
                 </button>
               </div>

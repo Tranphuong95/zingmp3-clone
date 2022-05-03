@@ -5,6 +5,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactLoading from 'react-loading';
 import { login, register } from "@/features/auth/auth";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 interface formLogin {
     email: string,
@@ -138,7 +139,7 @@ const Auth: React.FC<{ open: boolean, onClose: any }> = ({ open, onClose }) => {
     return (
         <div className="auth-container active">
             <button className='form-close btn' onClick={handleCloseFormAuth}>
-                <FontAwesomeIcon icon={faXmark} className="icon-form__close" />
+                <FontAwesomeIcon icon={faXmark as IconProp} className="icon-form__close" />
             </button>
             <h3>{isSignInForm ? "Đăng nhập" : "Đăng ký tài khoản"}</h3>
             <div className='choose-auth'>
